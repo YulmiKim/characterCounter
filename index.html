@@ -31,9 +31,13 @@
             color: #ef4444; /* Tailwind red-500 */
             font-weight: bold;
         }
-        /* 텍스트 초과 부분 강조 스타일 (textarea에서는 직접 적용되지 않음) */
-        .highlight-red {
-            color: #ef4444; /* Tailwind red-500 */
+        /* 텍스트 초과 부분 강조 스타일 */
+        /* 이 부분은 텍스트에 직접 적용되는 색상입니다. */
+        .highlight-red-text {
+            color: #ef4444; /* Tailwind red-500 for text */
+        }
+        .highlight-blue-text {
+            color: #3b82f6; /* Tailwind blue-500 for text */
         }
         /* 빌드 정보 컨테이너 스타일 */
         .build-info-container {
@@ -57,12 +61,189 @@
         }
 
         /* 새로운 강조 배경색 스타일 */
+        /* 초과 글자 (빨간색) */
+        .bg-highlight-red {
+            background-color: #fce7f3; /* Tailwind pink-100 */
+        }
+        /* 최대 문자 초과 (파란색) */
         .bg-highlight-blue {
             background-color: #e0f2fe; /* Tailwind blue-100 */
         }
+        /* 최대 줄 수 초과 (녹색) */
         .bg-highlight-green {
             background-color: #d1fae5; /* Tailwind green-100 */
         }
+
+        /* 세부 설정 체크박스 배경색 제거 (불필요한 보라색 배경 제거) */
+        #toggleSettings:checked ~ span {
+            /* 텍스트 색상만 유지, 배경색은 기본값으로 */
+            color: #1f2937; /* gray-800 */
+        }
+        label:has(input[type="checkbox"]#toggleSettings:checked) {
+            background-color: #f3f4f6; /* gray-100, 기본 배경색 */
+            border-color: #e5e7eb; /* gray-200, 기본 테두리색 */
+        }
+        label:has(input[type="checkbox"]#toggleSettings:checked):hover {
+            background-color: #e5e7eb; /* gray-200 */
+        }
+
+
+        /* 제외 옵션 체크박스 커스텀 색상 */
+        /* 기본 (선택 안 됨) */
+        .exclusion-label {
+            background-color: #e5e7eb; /* gray-200 */
+            border-color: #d1d5db; /* gray-300 */
+            color: #4b5563; /* gray-700 */
+        }
+        .exclusion-label:hover {
+            background-color: #d1d5db; /* gray-300 */
+        }
+        .exclusion-label span {
+            color: #4b5563; /* gray-700 */
+        }
+
+        /* <> 태그 - 진분홍 */
+        label:has(input[type="checkbox"]#excludeAngleBrackets:checked) {
+            background-color: #ec4899; /* Pink 500 */
+            border-color: #db2777; /* Pink 600 */
+            color: #ffffff;
+        }
+        label:has(input[type="checkbox"]#excludeAngleBrackets:checked):hover {
+            background-color: #db2777; /* Pink 600 */
+        }
+        #excludeAngleBrackets:checked ~ span {
+            color: #ffffff;
+        }
+        /* <> 태그 - 톤다운된 연한 빨강 (선택 안 됨) */
+        label:has(input[type="checkbox"]#excludeAngleBrackets:not(:checked)).exclusion-label {
+            background-color: #fca5a5; /* Red 300 */
+            border-color: #ef4444; /* Red 500 */
+            color: #ef4444; /* Red 500 */
+        }
+        label:has(input[type="checkbox"]#excludeAngleBrackets:not(:checked)).exclusion-label:hover {
+            background-color: #f87171; /* Red 400 */
+        }
+        label:has(input[type="checkbox"]#excludeAngleBrackets:not(:checked)).exclusion-label span {
+            color: #ef4444; /* Red 500 */
+        }
+
+
+        /* [] 태그 - 연청색 */
+        label:has(input[type="checkbox"]#excludeSquareBrackets:checked) {
+            background-color: #38bdf8; /* Sky 400 */
+            border-color: #0ea5e9; /* Sky 500 */
+            color: #ffffff;
+        }
+        label:has(input[type="checkbox"]#excludeSquareBrackets:checked):hover {
+            background-color: #0ea5e9; /* Sky 500 */
+        }
+        #excludeSquareBrackets:checked ~ span {
+            color: #ffffff;
+        }
+        /* [] 태그 - 톤다운된 연한 파랑 (선택 안 됨) */
+        label:has(input[type="checkbox"]#excludeSquareBrackets:not(:checked)).exclusion-label {
+            background-color: #93c5fd; /* Blue 300 */
+            border-color: #3b82f6; /* Blue 500 */
+            color: #3b82f6; /* Blue 500 */
+        }
+        label:has(input[type="checkbox"]#excludeSquareBrackets:not(:checked)).exclusion-label:hover {
+            background-color: #60a5fa; /* Blue 400 */
+        }
+        label:has(input[type="checkbox"]#excludeSquareBrackets:not(:checked)).exclusion-label span {
+            color: #3b82f6; /* Blue 500 */
+        }
+
+
+        /* {} 태그 - 보라색 (새로 추가) */
+        label:has(input[type="checkbox"]#excludeCurlyBrackets:checked) {
+            background-color: #a855f7; /* Purple 500 */
+            border-color: #9333ea; /* Purple 600 */
+            color: #ffffff;
+        }
+        label:has(input[type="checkbox"]#excludeCurlyBrackets:checked):hover {
+            background-color: #9333ea; /* Purple 600 */
+        }
+        #excludeCurlyBrackets:checked ~ span {
+            color: #ffffff;
+        }
+        /* {} 태그 - 톤다운된 연한 보라 (선택 안 됨) */
+        label:has(input[type="checkbox"]#excludeCurlyBrackets:not(:checked)).exclusion-label {
+            background-color: #d8b4fe; /* Purple 300 */
+            border-color: #a855f7; /* Purple 500 */
+            color: #a855f7; /* Purple 500 */
+        }
+        label:has(input[type="checkbox"]#excludeCurlyBrackets:not(:checked)).exclusion-label:hover {
+            background-color: #c084fc; /* Purple 400 */
+        }
+        label:has(input[type="checkbox"]#excludeCurlyBrackets:not(:checked)).exclusion-label span {
+            color: #a855f7; /* Purple 500 */
+        }
+
+
+        /* 공백 - 검정 */
+        label:has(input[type="checkbox"]#excludeSpaces:checked) {
+            background-color: #1f2937; /* Gray 900 */
+            border-color: #111827; /* Gray 950 */
+            color: #ffffff;
+        }
+        label:has(input[type="checkbox"]#excludeSpaces:checked):hover {
+            background-color: #111827; /* Gray 950 */
+        }
+        #excludeSpaces:checked ~ span {
+            color: #ffffff;
+        }
+        /* 공백 - 톤다운된 연한 회색 (선택 안 됨) */
+        label:has(input[type="checkbox"]#excludeSpaces:not(:checked)).exclusion-label {
+            background-color: #e5e7eb; /* Gray 200 */
+            border-color: #9ca3af; /* Gray 400 */
+            color: #9ca3af; /* Gray 400 */
+        }
+        label:has(input[type="checkbox"]#excludeSpaces:not(:checked)).exclusion-label:hover {
+            background-color: #d1d5db; /* Gray 300 */
+        }
+        label:has(input[type="checkbox"]#excludeSpaces:not(:checked)).exclusion-label span {
+            color: #9ca3af; /* Gray 400 */
+        }
+
+
+        /* 개행 - 검정 */
+        label:has(input[type="checkbox"]#excludeNewlines:checked) {
+            background-color: #1f2937; /* Gray 900 */
+            border-color: #111827; /* Gray 950 */
+            color: #ffffff;
+        }
+        label:has(input[type="checkbox"]#excludeNewlines:checked):hover {
+            background-color: #111827; /* Gray 950 */
+        }
+        #excludeNewlines:checked ~ span {
+            color: #ffffff;
+        }
+        /* 개행 - 톤다운된 연한 회색 (선택 안 됨) */
+        label:has(input[type="checkbox"]#excludeNewlines:not(:checked)).exclusion-label {
+            background-color: #e5e7eb; /* Gray 200 */
+            border-color: #9ca3af; /* Gray 400 */
+            color: #9ca3af; /* Gray 400 */
+        }
+        label:has(input[type="checkbox"]#excludeNewlines:not(:checked)).exclusion-label:hover {
+            background-color: #d1d5db; /* Gray 300 */
+        }
+        label:has(input[type="checkbox"]#excludeNewlines:not(:checked)).exclusion-label span {
+            color: #9ca3af; /* Gray 400 */
+        }
+
+
+        /* 텍스트 영역의 강조된 부분에만 적용될 스타일 */
+        .highlight-red-inline {
+            color: #ef4444; /* Tailwind red-500 */
+        }
+        .highlight-blue-inline {
+            color: #3b82f6; /* Tailwind blue-500 */
+        }
+        /* 새로운 강조색: 보라색 ({} 태그용) */
+        .highlight-purple-inline {
+            color: #a855f7; /* Tailwind purple-500 */
+        }
+
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
@@ -127,51 +308,63 @@
             </div>
         </div>
 
-        <!-- Option buttons (Moved here) -->
-        <div class="mb-6 flex flex-wrap justify-center gap-4">
-            <!-- Tag exclusion checkbox -->
-            <label class="flex items-center cursor-pointer px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors duration-200 shadow-md">
-                <input type="checkbox" id="toggleTagExclusion" class="form-checkbox h-5 w-5 text-blue-600 rounded" checked>
-                <span id="tagExclusionLabel" class="ml-2 text-gray-700 font-semibold">태그 제외</span>
-            </label>
+        <!-- Exclusion options section -->
+        <div class="mb-6">
+            <h2 id="exclusionOptionsTitle" class="text-lg font-bold text-gray-800 mb-4">제외 옵션</h2>
+            <div class="flex flex-wrap justify-center gap-4">
+                <!-- Tag exclusion checkbox for angle brackets -->
+                <label class="exclusion-label flex items-center cursor-pointer px-4 py-2 rounded-full transition-colors duration-200 shadow-md">
+                    <input type="checkbox" id="excludeAngleBrackets" class="form-checkbox h-5 w-5 text-blue-600 rounded" checked>
+                    <span id="labelExcludeAngleBrackets" class="ml-2 font-semibold"><> 태그</span>
+                </label>
 
-            <!-- Space exclusion checkbox -->
-            <label class="flex items-center cursor-pointer px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors duration-200 shadow-md">
-                <input type="checkbox" id="toggleSpaceExclusion" class="form-checkbox h-5 w-5 text-blue-600 rounded">
-                <span id="spaceExclusionLabel" class="ml-2 text-gray-700 font-semibold">공백 제외</span>
-            </label>
+                <!-- Tag exclusion checkbox for square brackets -->
+                <label class="exclusion-label flex items-center cursor-pointer px-4 py-2 rounded-full transition-colors duration-200 shadow-md">
+                    <input type="checkbox" id="excludeSquareBrackets" class="form-checkbox h-5 w-5 text-blue-600 rounded" checked>
+                    <span id="labelExcludeSquareBrackets" class="ml-2 font-semibold">[] 태그</span>
+                </label>
 
-            <!-- Character counting mode selector -->
-            <div id="countingModeSelector" class="relative inline-block text-left">
-                <button id="countingModeToggleButton" class="inline-flex justify-center items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                <!-- Tag exclusion checkbox for curly braces (NEW) -->
+                <label class="exclusion-label flex items-center cursor-pointer px-4 py-2 rounded-full transition-colors duration-200 shadow-md">
+                    <input type="checkbox" id="excludeCurlyBrackets" class="form-checkbox h-5 w-5 text-blue-600 rounded" checked>
+                    <span id="labelExcludeCurlyBrackets" class="ml-2 font-semibold">{} 태그</span>
+                </label>
+
+                <!-- Space exclusion checkbox -->
+                <label class="exclusion-label flex items-center cursor-pointer px-4 py-2 rounded-full transition-colors duration-200 shadow-md">
+                    <input type="checkbox" id="excludeSpaces" class="form-checkbox h-5 w-5 text-blue-600 rounded">
+                    <span id="labelExcludeSpaces" class="ml-2 font-semibold">공백</span>
+                </label>
+
+                <!-- Newline exclusion checkbox -->
+                <label class="exclusion-label flex items-center cursor-pointer px-4 py-2 rounded-full transition-colors duration-200 shadow-md">
+                    <input type="checkbox" id="excludeNewlines" class="form-checkbox h-5 w-5 text-blue-600 rounded" checked>
+                    <span id="labelExcludeNewlines" class="ml-2 font-semibold">개행</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Character counting mode selector (Dropdown) -->
+        <div class="mb-6">
+            <h2 id="countingModeLabel" class="text-lg font-bold text-gray-800 mb-2">문자 카운트 모드</h2>
+            <div id="countingModeSelector" class="relative inline-block text-left w-full sm:w-auto">
+                <button id="countingModeToggleButton" type="button" class="inline-flex justify-between items-center w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
                     <span id="currentCountingModeText">전각 기준</span>
-                    <svg class="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.23 8.29a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
                     </svg>
                 </button>
-
-                <div id="countingModeDropdown" class="absolute left-0 z-10 mt-2 w-64 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="countingModeToggleButton" tabindex="-1">
+                <div id="countingModeDropdown" class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="countingModeToggleButton" tabindex="-1">
                     <div class="py-1" role="none">
-                        <!-- Counting mode options will be dynamically populated here -->
+                        <!-- Language options will be dynamically populated here -->
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Text input area -->
-        <div class="mb-6">
-            <label for="textInput" id="inputLabel" class="block text-gray-700 text-sm font-semibold mb-2">
-                여기에 텍스트를 입력하세요:
-            </label>
-            <textarea
-                id="textInput"
-                class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-64 resize-y"
-                placeholder="텍스트를 입력하면 실시간으로 문자 수가 계산됩니다."
-            ></textarea>
-        </div>
-
-        <!-- Count results display area -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+        <!-- Count results display area (Moved above text input) -->
+        <!-- Adjusted to use grid layout for better control over column arrangement -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             <div class="bg-blue-50 p-4 rounded-lg shadow-sm">
                 <h2 id="totalCharCountTitle" class="text-lg font-semibold text-blue-700 mb-2">문자 수</h2>
                 <p id="totalCharCount" class="text-4xl font-extrabold text-blue-900">0</p>
@@ -186,8 +379,24 @@
             </div>
         </div>
 
+        <!-- Text input area -->
+        <div class="mb-6">
+            <textarea
+                id="textInput"
+                class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-64 resize-y custom-scrollbar"
+                placeholder="텍스트를 입력하면 실시간으로 문자 수가 계산됩니다."
+            ></textarea>
+        </div>
+
+        <!-- Highlighted/Excluded text display area (Moved here) -->
+        <div id="highlightedTextDisplay" class="mt-4 p-4 border border-gray-300 rounded-lg bg-gray-50 max-h-48 overflow-y-auto custom-scrollbar whitespace-pre-wrap">
+            <!-- Emphasized or excluded text will be displayed here -->
+            텍스트를 입력하시면 태그 강조 또는 제외된 내용이 여기에 표시됩니다.
+        </div>
+
+
         <!-- Character count per line display area -->
-        <div class="bg-yellow-50 p-4 rounded-lg shadow-sm">
+        <div class="bg-yellow-50 p-4 rounded-lg shadow-sm mt-6"> <!-- Adjusted margin-top -->
             <h2 id="lineCharCountsTitle" class="text-lg font-semibold text-yellow-700 mb-2">행별 문자 수</h2>
             <div id="lineCharCounts" class="text-gray-800 text-sm max-h-48 overflow-y-auto custom-scrollbar">
                 <!-- Line-by-line count results will be dynamically displayed here. -->
@@ -197,604 +406,797 @@
     </div>
 
     <script>
-        const textInput = document.getElementById('textInput');
-        const appTitle = document.getElementById('appTitle');
-        const inputLabel = document.getElementById('inputLabel');
-        const totalCharCount = document.getElementById('totalCharCount');
-        const totalCharCountTitle = document.getElementById('totalCharCountTitle');
-        const totalLineCount = document.getElementById('totalLineCount');
-        const totalLineCountTitle = document.getElementById('totalLineCountTitle');
-        const lineCharCounts = document.getElementById('lineCharCounts');
-        const lineCharCountsTitle = document.getElementById('lineCharCountsTitle');
-        const noTextPrompt = document.getElementById('noTextPrompt');
-        const totalWordCount = document.getElementById('totalWordCount');
-        const totalWordCountTitle = document.getElementById('totalWordCountTitle');
-        const wordCountContainer = document.getElementById('wordCountContainer');
-        const buildVersionDateElement = document.getElementById('buildVersionDate'); // 빌드 버전 및 날짜 엘리먼트
-
-        // Language selection related DOM elements
-        const languageToggleButton = document.getElementById('languageToggleButton');
-        const languageDropdown = document.getElementById('languageDropdown');
-        const currentLanguageText = document.getElementById('currentLanguageText');
-        const languageSelector = document.getElementById('languageSelector');
-
-        // Character counting mode selection related DOM elements
-        const countingModeToggleButton = document.getElementById('countingModeToggleButton');
-        const countingModeDropdown = document.getElementById('countingModeDropdown');
-        const currentCountingModeText = document.getElementById('currentCountingModeText');
-        const countingModeSelector = document.getElementById('countingModeSelector');
-
-        // Checkbox elements
-        const toggleTagExclusionCheckbox = document.getElementById('toggleTagExclusion');
-        const tagExclusionLabel = document.getElementById('tagExclusionLabel');
-        const toggleSpaceExclusionCheckbox = document.getElementById('toggleSpaceExclusion');
-        const spaceExclusionLabel = document.getElementById('spaceExclusionLabel');
-
-        // Settings elements
-        const toggleSettingsCheckbox = document.getElementById('toggleSettings');
-        const settingsLabel = document.getElementById('settingsLabel');
-        const settingsContainer = document.getElementById('settingsContainer');
-        const maxCharTotalInput = document.getElementById('maxCharTotalInput');
-        const maxCharTotalLabel = document.getElementById('maxCharTotalLabel');
-        const maxCharLineInput = document.getElementById('maxCharLineInput');
-        const maxCharLineLabel = document.getElementById('maxCharLineLabel');
-        const maxLineInput = document.getElementById('maxLineInput');
-        const maxLineLabel = document.getElementById('maxLineLabel');
-        const maxWordsInput = document.getElementById('maxWordsInput');
-        const maxWordsLabel = document.getElementById('maxWordsLabel');
-        const maxWordsSettingContainer = document.getElementById('maxWordsSettingContainer');
-        const settingsMessageBoard = document.getElementById('settingsMessageBoard');
-
-
-        // Current state variables
-        let currentLanguage = 'ko';
-        let countingMode = 'fullWidthBasis';
-        let excludeTags = true;
-        let excludeSpaces = false;
-        let settingsEnabled = false; // Default: settings are not enabled/shown
-
-        // Multilingual translation text object
-        const translations = {
-            ko: {
-                appTitle: '문자 카운터 앱',
-                inputLabel: '여기에 텍스트를 입력하세요:',
-                placeholder: '텍스트를 입력하면 실시간으로 문자 수가 계산됩니다.',
-                charCountLabel: '문자 수',
-                lineCountLabel: '줄 수',
-                lineCharCountTitle: '행별 문자 수',
-                linePrefix: '행',
-                charUnit: '문자',
-                noTextPrompt: '텍스트를 입력하면 각 행의 문자 수가 표시됩니다.',
-                langName: '한국어',
-                wordCountSupported: false,
-                wordCountLabel: '단어 수',
-                tagExclusionLabel: '태그 제외',
-                spaceExclusionLabel: '공백 제외',
-                settingsLabel: '세부 설정',
-                maxCharTotalLabel: '최대 문자 수 (전체)',
-                maxCharLineLabel: '최대 문자 수 (행별)', // Restored original label text
-                maxLineLabel: '최대 줄 수',
-                maxWordsLabel: '최대 단어 수',
-                settingsPrompt: '설정을 입력해 주세요.',
-                maxCharTotalExceeded: '최대 문자 수(전체)를 초과했습니다!',
-                maxCharLineExceeded: '최대 문자 수(행별)를 초과하는 행이 있습니다! ({count}개)', // Used for message board
-                maxLineExceeded: '최대 줄 수를 초과했습니다!',
-                maxWordsExceeded: '최대 단어 수를 초과했습니다!',
-                countingModes: {
-                    fullWidthBasis: '전각 기준',
-                    halfWidthBasis: '반각 기준',
-                    mixedWidth: '전각+반각 혼합'
-                }
-            },
-            en: {
-                appTitle: 'Character Counter App',
-                inputLabel: 'Enter your text here:',
-                placeholder: 'Enter text to count characters in real-time.',
-                charCountLabel: 'Characters',
-                lineCountLabel: 'Lines',
-                lineCharCountTitle: 'Characters per Line',
-                linePrefix: 'Line',
-                charUnit: 'characters',
-                noTextPrompt: 'Enter text to see character counts per line.',
-                langName: 'English',
-                wordCountSupported: true,
-                wordCountLabel: 'Words',
-                tagExclusionLabel: 'Exclude Tags',
-                spaceExclusionLabel: 'Exclude Spaces',
-                settingsLabel: 'Detailed Settings',
-                maxCharTotalLabel: 'Max Characters (Total)',
-                maxCharLineLabel: 'Max Characters (Per Line)', // Restored original label text
-                maxLineLabel: 'Max Lines',
-                maxWordsLabel: 'Max Words',
-                settingsPrompt: 'Please enter settings.',
-                maxCharTotalExceeded: 'Max total characters exceeded!',
-                maxCharLineExceeded: 'Lines exceeding max characters per line: ({count})', // Used for message board
-                maxLineExceeded: 'Max lines exceeded!',
-                maxWordsExceeded: 'Max words exceeded!',
-                countingModes: {
-                    fullWidthBasis: 'Full-width Basis',
-                    halfWidthBasis: 'Half-width Basis',
-                    mixedWidth: 'Full/Half-width Mixed'
-                }
-            },
-            ja: {
-                appTitle: '文字カウンターアプリ',
-                inputLabel: 'ここにテキストを入力してください：',
-                placeholder: 'テキストを入力すると、リアルタイムで文字数がカウント됩니다.',
-                charCountLabel: '文字数',
-                lineCountLabel: '行数',
-                lineCharCountTitle: '行ごとの文字数',
-                linePrefix: '行',
-                charUnit: '文字',
-                noTextPrompt: 'テキストを入力すると、各行の文字数が表示されます。',
-                langName: '日本語',
-                wordCountSupported: false,
-                wordCountLabel: '単語数',
-                tagExclusionLabel: 'タグ除外',
-                spaceExclusionLabel: '空白除外',
-                settingsLabel: '詳細設定',
-                maxCharTotalLabel: '最大文字数 (全体)',
-                maxCharLineLabel: '最大文字数 (行ごと)', // Restored original label text
-                maxLineLabel: '最大行数',
-                maxWordsLabel: '最大単語数',
-                settingsPrompt: '設定を入力してください。',
-                maxCharTotalExceeded: '最大文字数(全体)を超過しました！',
-                maxCharLineExceeded: '最大文字数(行ごと)を超過する行があります！ ({count}個)', // Used for message board
-                maxLineExceeded: '最大行数を超過しました！',
-                maxWordsExceeded: '最大単語数を超過しました！',
-                countingModes: {
-                    fullWidthBasis: '全角ベース',
-                    halfWidthBasis: '半角ベース',
-                    mixedWidth: '全角/半角混合'
-                }
-            }
-        };
-
-        /**
-         * HTML 태그를 제거하는 함수입니다.
-         * @param {string} htmlString - 태그를 제거할 문자열
-         * @returns {string} 태그가 제거된 문자열
-         */
-        function removeHtmlTags(htmlString) {
-            return htmlString.replace(/<[^>]*>/g, '');
-        }
-
-        /**
-         * 공백을 제거하는 함수입니다.
-         * @param {string} textString - 공백을 제거할 문자열
-         * @returns {string} 공백이 제거된 문자열
-         */
-        function removeSpaces(textString) {
-            return textString.replace(/\s/g, ''); // 모든 공백 문자 제거
-        }
-
-        /**
-         * 특정 문자가 전각(Full-width) 문자인지 판단하는 함수입니다.
-         * 유니코드 범위에 따라 전각 문자를 대략적으로 판단합니다.
-         * @param {string} char - 검사할 문자
-         * @returns {boolean} 전각 문자이면 true, 아니면 false
-         */
-        function isFullWidthChar(char) {
-            const code = char.charCodeAt(0);
-            return (
-                code >= 0x1100 && code <= 0x11FF || // Hangul Jamo
-                code >= 0x2E80 && code <= 0x2FFF || // CJK Radicals Supplement, Kangxi Radicals, Ideographic Description Characters, CJK Symbols and Punctuation, Hiragana, Katakana
-                code >= 0x3040 && code <= 0x309F || // Hiragana
-                code >= 0x30A0 && code <= 0x30FF || // Katakana
-                code >= 0x3100 && code <= 0x312F || // Bopomofo
-                code >= 0x3130 && code <= 0x318F || // Hangul Compatibility Jamo
-                code >= 0x3190 && code <= 0x319F || // Kanbun
-                code >= 0x31A0 && code <= 0x31BF || // Bopomofo Extended
-                code >= 0x31F0 && code <= 0x31FF || // Katakana Phonetic Extensions
-                code >= 0x3200 && code <= 0x32FF || // Enclosed CJK Letters and Months
-                code >= 0x3300 && code <= 0x33FF || // CJK Compatibility
-                code >= 0x3400 && code <= 0x4DBF || // CJK Unified Ideographs Extension A
-                code >= 0x4E00 && code <= 0x9FFF || // CJK Unified Ideographs
-                code >= 0xA000 && code <= 0xA48F || // Yi Syllables
-                code >= 0xA490 && code <= 0xA4CF || // Yi Radicals
-                code >= 0xAC00 && code <= 0xD7AF || // Hangul Syllables
-                code >= 0xF900 && code <= 0xFAFF || // CJK Compatibility Ideographs
-                code >= 0xFE30 && code <= 0xFE4F || // CJK Compatibility Forms
-                code >= 0xFF00 && code <= 0xFFEF    // Halfwidth and Fullwidth Forms (especially full-width ASCII)
-            );
-        }
-
-        /**
-         * 선택된 countingMode에 따라 문자열의 길이를 계산합니다.
-         * @param {string} text - 길이를 계산할 문자열
-         * @returns {number} 계산된 문자열 길이
-         */
-        function calculateLength(text) {
-            if (countingMode === 'fullWidthBasis') {
-                // 전각 기준: 모든 문자를 1로 카운트 (전각 문자 1개는 1자로 간주)
-                return text.length;
-            } else if (countingMode === 'halfWidthBasis') {
-                // 반각 기준: 전각 문자는 2로, 반각 문자는 1로 카운트
-                let count = 0;
-                for (let i = 0; i < text.length; i++) {
-                    if (isFullWidthChar(text[i])) {
-                        count += 2; // 전각 문자는 반각 2개로 간주
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DOM Elements ---
+            const getDomElements = () => {
+                const ids = [
+                    'textInput', 'appTitle', 'totalCharCount', 'totalCharCountTitle',
+                    'totalLineCount', 'totalLineCountTitle', 'lineCharCounts', 'lineCharCountsTitle',
+                    'noTextPrompt', 'totalWordCount', 'totalWordCountTitle', 'wordCountContainer',
+                    'buildVersionDate', 'languageToggleButton', 'languageDropdown',
+                    'currentLanguageText', 'languageSelector', 'countingModeToggleButton',
+                    'countingModeDropdown', 'currentCountingModeText', 'countingModeSelector',
+                    'excludeAngleBrackets', 'labelExcludeAngleBrackets',
+                    'excludeSquareBrackets', 'labelExcludeSquareBrackets',
+                    'excludeCurlyBrackets', 'labelExcludeCurlyBrackets', // NEW: Curly Brackets
+                    'excludeSpaces', 'labelExcludeSpaces',
+                    'excludeNewlines', 'labelExcludeNewlines',
+                    'toggleSettings', 'settingsLabel', 'settingsContainer', 'maxCharTotalInput',
+                    'maxCharTotalLabel', 'maxCharLineInput', 'maxCharLineLabel', 'maxLineInput',
+                    'maxLineLabel', 'maxWordsInput', 'maxWordsLabel', 'maxWordsSettingContainer',
+                    'settingsMessageBoard', 'exclusionOptionsTitle', 'countingModeLabel',
+                    'highlightedTextDisplay'
+                ];
+                const elements = {};
+                ids.forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        elements[id] = element;
                     } else {
-                        count += 1; // 반각 문자는 반각 1개로 간주
+                        console.error(`Error: Element with ID '${id}' not found. Please check HTML.`);
                     }
+                });
+                return elements;
+            };
+
+            const dom = getDomElements();
+
+            // --- State Variables ---
+            let currentLanguage = 'ko';
+            let countingMode = 'fullWidthBasis';
+            let excludeAngleBrackets = true;
+            let excludeSquareBrackets = true;
+            let excludeCurlyBrackets = true; // NEW: Curly Brackets exclusion state
+            let excludeSpaces = false;
+            let excludeNewlines = true; // Initial state set to true by default in the code
+            let settingsEnabled = false;
+
+            // --- Translations ---
+            const translations = {
+                ko: {
+                    appTitle: '문자 카운터 앱',
+                    placeholder: '텍스트를 입력하면 실시간으로 문자 수가 계산됩니다.',
+                    charCountLabel: '문자 수',
+                    lineCountLabel: '줄 수',
+                    lineCharCountTitle: '행별 문자 수',
+                    linePrefix: '행',
+                    charUnit: '문자',
+                    noTextPrompt: '텍스트를 입력하면 각 행의 문자 수가 표시됩니다.',
+                    langName: '한국어',
+                    wordCountSupported: false,
+                    wordCountLabel: '단어 수',
+                    exclusionOptionsTitle: '제외 옵션',
+                    angleBracketExclusionLabel: '<> 태그', // Updated label
+                    squareBracketExclusionLabel: '[] 태그', // Updated label
+                    curlyBracketExclusionLabel: '{} 태그', // NEW: Curly Brackets label
+                    spaceExclusionLabel: '공백',
+                    newlineExclusionLabel: '개행',
+                    settingsLabel: '세부 설정',
+                    maxCharTotalLabel: '최대 문자 수 (전체)',
+                    maxCharLineLabel: '최대 문자 수 (행별)',
+                    maxLineLabel: '최대 줄 수',
+                    maxWordsLabel: '최대 단어 수',
+                    settingsPrompt: '설정을 입력해 주세요.',
+                    countingModes: {
+                        fullWidthBasis: '전각 기준',
+                        halfWidthBasis: '반각 기준',
+                        mixedWidth: '전각+반각 혼합'
+                    },
+                    countingModeLabel: '문자 카운트 모드',
+                    maxCharTotalExceeded: '최대 문자 수(전체)를 초과했습니다!',
+                    maxCharLineExceeded: '최대 문자 수(행별)를 초과하는 행이 있습니다! ({count}개)',
+                    maxLineExceeded: '최대 줄 수를 초과했습니다!',
+                    maxWordsExceeded: '최대 단어 수를 초과했습니다!'
+                },
+                en: {
+                    appTitle: 'Character Counter App',
+                    placeholder: 'Enter text to count characters in real-time.',
+                    charCountLabel: 'Characters',
+                    lineCountLabel: 'Lines',
+                    lineCharCountTitle: 'Characters per Line',
+                    linePrefix: 'Line', // Corrected: Added 'Line'
+                    charUnit: 'characters', // Corrected: Added 'characters'
+                    noTextPrompt: 'Enter text to see character counts per line.',
+                    langName: 'English',
+                    wordCountSupported: true,
+                    exclusionOptionsTitle: 'Exclusion Options',
+                    angleBracketExclusionLabel: '<> Tags', // Updated label
+                    squareBracketExclusionLabel: '[] Tags', // Updated label
+                    curlyBracketExclusionLabel: '{} Tags', // NEW: Curly Brackets label
+                    spaceExclusionLabel: 'Spaces',
+                    newlineExclusionLabel: 'Newlines',
+                    settingsLabel: 'Detailed Settings',
+                    maxCharTotalLabel: 'Max Characters (Total)',
+                    maxCharLineLabel: 'Max Characters (Per Line)',
+                    maxLineLabel: 'Max Lines',
+                    maxWordsLabel: 'Max Words',
+                    settingsPrompt: 'Please enter settings.',
+                    countingModes: {
+                        fullWidthBasis: 'Full-width Basis',
+                        halfWidthBasis: 'Half-width Basis',
+                        mixedWidth: 'Full/Half-width Mixed'
+                    },
+                    countingModeLabel: 'Character Counting Mode',
+                    maxCharTotalExceeded: 'Max total characters exceeded!',
+                    maxCharLineExceeded: 'Lines exceeding max characters per line: ({count})',
+                    maxLineExceeded: 'Max lines exceeded!',
+                    maxWordsExceeded: 'Max words exceeded!'
+                },
+                ja: {
+                    appTitle: '文字カウンターアプリ',
+                    placeholder: 'テキストを入力すると、リアルタイムで文字数がカウントされます。',
+                    charCountLabel: '文字数',
+                    lineCountLabel: '行数',
+                    lineCharCountTitle: '行ごとの文字数',
+                    linePrefix: '行',
+                    charUnit: '文字',
+                    noTextPrompt: 'テキストを入力すると、各行の文字数が表示されます。',
+                    langName: '日本語',
+                    wordCountSupported: false,
+                    wordCountLabel: '単語数',
+                    exclusionOptionsTitle: '除外オプション',
+                    angleBracketExclusionLabel: '<>タグ',
+                    squareBracketExclusionLabel: '[]タグ',
+                    curlyBracketExclusionLabel: '{}タグ',
+                    spaceExclusionLabel: '空白',
+                    newlineExclusionLabel: '改行',
+                    settingsLabel: '詳細設定',
+                    maxCharTotalLabel: '最大文字数 (全体)',
+                    maxCharLineLabel: '最大文字数 (行ごと)',
+                    maxLineLabel: '最大行数',
+                    maxWordsLabel: '最大単語数',
+                    settingsPrompt: '設定を入力してください。',
+                    countingModes: {
+                        fullWidthBasis: '全角ベース',
+                        halfWidthBasis: '半각ベース',
+                        mixedWidth: '全각/半각混合'
+                    },
+                    countingModeLabel: '文字カウントモード',
+                    maxCharTotalExceeded: '最大文字数(全体)を超過しました！',
+                    maxCharLineExceeded: '最大文字数(行ごと)を超過する行があります！ ({count}개)',
+                    maxLineExceeded: '最大行数を超過しました！',
+                    maxWordsExceeded: '最大단어数を超過しました！'
                 }
-                return count;
-            } else if (countingMode === 'mixedWidth') {
-                // 전각/반각 혼합: 전각 문자는 1, 반각 문자는 0.5로 카운트
-                let count = 0;
-                for (let i = 0; i < text.length; i++) {
-                    if (isFullWidthChar(text[i])) {
-                        count += 1; // 전각 문자는 1로 카운트
-                    } else {
-                        count += 0.5; // 반각 문자는 0.5로 카운트
+            };
+
+            // --- Utility Functions ---
+
+            /**
+             * 태그(<>, [], {})를 제거하는 함수입니다.
+             * @param {string} textString - 태그를 제거할 문자열
+             * @returns {string} 태그가 제거된 문자열
+             */
+            function removeTags(textString) {
+                let cleanedString = textString;
+                if (excludeAngleBrackets) {
+                    cleanedString = cleanedString.replace(/<[^>]*>/g, '');
+                }
+                if (excludeSquareBrackets) {
+                    cleanedString = cleanedString.replace(/\[[^\]]*\]/g, '');
+                }
+                if (excludeCurlyBrackets) { // NEW: Curly Brackets exclusion
+                    cleanedString = cleanedString.replace(/\{[^}]*\}/g, '');
+                }
+                return cleanedString;
+            }
+
+            /**
+             * 공백을 제거하는 함수입니다.
+             * @param {string} textString - 공백을 제거할 문자열
+             * @returns {string} 공백이 제거된 문자열
+             */
+            function removeSpaces(textString) {
+                return textString.replace(/\s/g, '');
+            }
+
+            /**
+             * 개행 문자(\n)를 제거하는 함수입니다.
+             * @param {string} textString - 개행 문자를 제거할 문자열
+             * @returns {string} 개행 문자가 제거된 문자열
+             */
+            function removeNewlines(textString) {
+                // 이 함수는 주로 문자 수 계산에 사용되며, 개행 문자를 빈 문자열로 대체하여 길이에 포함되지 않게 합니다.
+                return textString.replace(/\n/g, '');
+            }
+
+            /**
+             * 특정 문자가 전각(Full-width) 문자인지 판단하는 함수입니다.
+             * 유니코드 범위에 따라 전각 문자를 대략적으로 판단합니다.
+             * @param {string} char - 검사할 문자
+             * @returns {boolean} 전각 문자이면 true, 아니면 false
+             */
+            function isFullWidthChar(char) {
+                const code = char.charCodeAt(0);
+                return (
+                    (code >= 0x1100 && code <= 0x11FF) || // Hangul Jamo
+                    (code >= 0x2E80 && code <= 0x2FFF) || // CJK Radicals Supplement, etc.
+                    (code >= 0x3040 && code <= 0x309F) || // Hiragana
+                    (code >= 0x30A0 && code <= 0x30FF) || // Katakana
+                    (code >= 0x3100 && code <= 0x312F) || // Bopomofo
+                    (code >= 0x3130 && code <= 0x318F) || // Hangul Compatibility Jamo
+                    (code >= 0x3190 && code <= 0x319F) || // Kanbun
+                    (code >= 0x31A0 && code <= 0x31BF) || // Bopomofo Extended
+                    (code >= 0x31F0 && code <= 0x31FF) || // Katakana Phonetic Extensions
+                    (code >= 0x3200 && code <= 0x32FF) || // Enclosed CJK Letters and Months
+                    (code >= 0x3300 && code <= 0x33FF) || // CJK Compatibility
+                    (code >= 0x3400 && code <= 0x4DBF) || // CJK Unified Ideographs Extension A
+                    (code >= 0x4E00 && code <= 0x9FFF) || // CJK Unified Ideographs
+                    (code >= 0xA000 && code <= 0xA48F) || // Yi Syllables
+                    (code >= 0xA490 && code <= 0xA4CF) || // Yi Radicals
+                    (code >= 0xAC00 && code <= 0xD7AF) || // Hangul Syllables
+                    (code >= 0xF900 && code <= 0xFAFF) || // CJK Compatibility Ideographs
+                    (code >= 0xFE30 && code <= 0xFE4F) || // CJK Compatibility Forms
+                    (code >= 0xFF00 && code <= 0xFFEF)     // Halfwidth and Fullwidth Forms (especially full-width ASCII)
+                );
+            }
+
+            /**
+             * 선택된 countingMode에 따라 문자열의 길이를 계산합니다.
+             * @param {string} text - 길이를 계산할 문자열
+             * @returns {number} 계산된 문자열 길이
+             */
+            function calculateLength(text) {
+                if (countingMode === 'fullWidthBasis') {
+                    return text.length;
+                } else if (countingMode === 'halfWidthBasis') {
+                    let count = 0;
+                    for (let i = 0; i < text.length; i++) {
+                        count += isFullWidthChar(text[i]) ? 2 : 1;
                     }
+                    return count;
+                } else if (countingMode === 'mixedWidth') {
+                    let count = 0;
+                    for (let i = 0; i < text.length; i++) {
+                        count += isFullWidthChar(text[i]) ? 1 : 0.5;
+                    }
+                    return count;
                 }
-                return count;
-            }
-            return 0; // Fallback
-        }
-
-        /**
-         * 문자 수를 계산하고 결과를 업데이트하는 함수입니다.
-         * 설정 값에 따른 유효성 검사 및 메시지 표시도 처리합니다.
-         */
-        function updateCounts() {
-            const lang = translations[currentLanguage];
-            let rawInputText = textInput.value; // 원본 입력 텍스트
-            let processedTextForCharAndLine = rawInputText;
-            let textForWordCount = rawInputText; // 단어 수 계산용 원본 텍스트 (태그 제외만 적용)
-
-            // 태그 제외 적용 (문자/줄/단어 수 모두에 영향을 미침)
-            if (excludeTags) {
-                processedTextForCharAndLine = removeHtmlTags(processedTextForCharAndLine);
-                textForWordCount = removeHtmlTags(textForWordCount);
-            }
-            // 공백 제외 적용 (문자/줄 수에만 영향을 미침)
-            if (excludeSpaces) {
-                processedTextForCharAndLine = removeSpaces(processedTextForCharAndLine);
+                return 0;
             }
 
-            // UI 텍스트 업데이트 (카운트 모드)
-            const currentModeText = lang.countingModes[countingMode];
-            totalCharCountTitle.textContent = `${lang.charCountLabel} (${currentModeText})`;
-            lineCharCountsTitle.textContent = `${lang.lineCharCountTitle} (${currentModeText})`;
+            // --- UI Update Functions ---
 
-            // 1. 전체 문자 수 계산
-            const currentTotalCharCount = calculateLength(processedTextForCharAndLine);
-            totalCharCount.textContent = currentTotalCharCount;
-
-            // 2. 각 줄별 문자 수 계산
-            const lines = processedTextForCharAndLine.split('\n');
-            const currentTotalLineCount = lines.length;
-            totalLineCount.textContent = currentTotalLineCount;
-
-            // 3. 단어 수 계산 (영어일 경우에만)
-            let currentTotalWordCount = 0;
-            if (lang.wordCountSupported) {
-                const words = textForWordCount.split(/\s+/).filter(word => word.length > 0);
-                currentTotalWordCount = words.length;
-                totalWordCount.textContent = currentTotalWordCount;
-                wordCountContainer.classList.remove('hidden'); // 컨테이너 표시
-                totalWordCountTitle.textContent = lang.wordCountLabel; // 단어 수 제목 업데이트
-            } else {
-                wordCountContainer.classList.add('hidden'); // 컨테이너 숨김
-            }
-
-            // 설정 메시지 보드 업데이트 및 유효성 검사 플래그 가져오기
-            const warningFlags = updateSettingsMessageBoard(currentTotalCharCount, currentTotalLineCount, currentTotalWordCount, lines);
-
-            lineCharCounts.innerHTML = ''; // 이전 결과 초기화
-
-            if (lines.length === 0 || (lines.length === 1 && lines[0].trim() === '')) {
-                // 입력된 텍스트가 없거나 공백만 있는 경우
-                lineCharCounts.appendChild(noTextPrompt);
-            } else {
-                lines.forEach((line, index) => {
-                    const lineElement = document.createElement('p');
-                    // "1행: XX 문자" 형식으로 표시
-                    lineElement.textContent = `${index + 1}${lang.linePrefix}: ${calculateLength(line)} ${lang.charUnit}`;
-
-                    // 기존 강조 클래스 제거
-                    lineElement.classList.remove('highlight-red', 'bg-highlight-blue', 'bg-highlight-green');
-
-                    // 설정이 활성화된 경우에만 강조 적용
-                    if (settingsEnabled) {
-                        const maxCharLine = parseFloat(maxCharLineInput.value);
-                        const maxLine = parseFloat(maxLineInput.value); // maxLine 값을 가져옴
-
-                        // 현재 줄이 최대 줄 수를 초과하는지 확인 (index는 0부터 시작, 줄 수는 1부터 시작)
-                        const isCurrentLineExceedingMaxLines = !isNaN(maxLine) && (index + 1) > maxLine;
-                        // 현재 줄의 문자 수가 최대 문자 수(행별)를 초과하는지 확인
-                        const isCurrentLineExceedingMaxCharLine = !isNaN(maxCharLine) && calculateLength(line) > maxCharLine;
-
-                        // 강조 로직: 줄 수 초과가 우선
-                        if (isCurrentLineExceedingMaxLines) {
-                            lineElement.classList.add('highlight-red', 'bg-highlight-green');
-                        } else if (isCurrentLineExceedingMaxCharLine) {
-                            lineElement.classList.add('highlight-red', 'bg-highlight-blue');
+            /**
+             * 언어 드롭다운의 옵션을 업데이트합니다.
+             */
+            function updateLanguageDropdownOptions() {
+                if (dom.languageDropdown) {
+                    const languageDropdownContent = dom.languageDropdown.querySelector('.py-1');
+                    if (languageDropdownContent) {
+                        languageDropdownContent.innerHTML = '';
+                        for (const langKey in translations) {
+                            const langData = translations[langKey];
+                            const a = document.createElement('a');
+                            a.href = "#";
+                            a.classList.add('text-gray-700', 'block', 'px-4', 'py-2', 'text-sm', 'hover:bg-gray-100', 'rounded-md');
+                            a.setAttribute('role', 'menuitem');
+                            a.setAttribute('tabindex', '-1');
+                            a.setAttribute('data-lang', langKey);
+                            a.textContent = langData.langName;
+                            languageDropdownContent.appendChild(a);
                         }
                     }
-
-                    lineElement.classList.add('py-1', 'border-b', 'border-yellow-100', 'last:border-b-0');
-                    lineCharCounts.appendChild(lineElement);
-                });
-            }
-        }
-
-        /**
-         * 언어 드롭다운의 옵션을 업데이트하는 함수입니다.
-         */
-        function updateLanguageDropdownOptions() {
-            const languageDropdownContent = languageDropdown.querySelector('.py-1');
-            languageDropdownContent.innerHTML = ''; // 기존 항목 지우기
-
-            // 언어 옵션 동적으로 채우기
-            for (const langKey in translations) {
-                const langData = translations[langKey];
-                const a = document.createElement('a');
-                a.href = "#";
-                a.classList.add('text-gray-700', 'block', 'px-4', 'py-2', 'text-sm', 'hover:bg-gray-100', 'rounded-md');
-                a.setAttribute('role', 'menuitem');
-                a.setAttribute('tabindex', '-1');
-                a.setAttribute('data-lang', langKey);
-                a.textContent = langData.langName;
-                languageDropdownContent.appendChild(a);
-            }
-        }
-
-        /**
-         * 문자 카운트 모드 드롭다운의 텍스트와 옵션을 업데이트하는 함수입니다.
-         */
-        function updateCountingModeDropdownText() {
-            const lang = translations[currentLanguage];
-            currentCountingModeText.textContent = lang.countingModes[countingMode];
-
-            // 현재 언어에 따라 카운트 모드 드롭다운 옵션 동적으로 채우기
-            const countingModeDropdownContent = countingModeDropdown.querySelector('.py-1');
-            countingModeDropdownContent.innerHTML = ''; // 기존 항목 지우기
-
-            for (const modeKey in lang.countingModes) {
-                const modeText = lang.countingModes[modeKey];
-                const a = document.createElement('a');
-                a.href = "#";
-                a.classList.add('text-gray-700', 'block', 'px-4', 'py-2', 'text-sm', 'hover:bg-gray-100', 'rounded-md');
-                a.setAttribute('role', 'menuitem');
-                a.setAttribute('tabindex', '-1');
-                a.setAttribute('data-mode', modeKey);
-                a.textContent = modeText;
-                countingModeDropdownContent.appendChild(a);
-            }
-        }
-
-        /**
-         * 설정 메시지 보드를 업데이트하고 유효성 검사를 수행하는 함수입니다.
-         * @param {number} currentTotalCharCount - 현재 계산된 전체 문자 수
-         * @param {number} currentTotalLineCount - 현재 계산된 전체 줄 수
-         * @param {number} currentTotalWordCount - 현재 계산된 전체 단어 수
-         * @param {Array<string>} lines - 처리된 텍스트의 각 줄 배열 (여기서는 원본 텍스트의 줄이 아닌, 처리된 텍스트의 줄)
-         * @returns {object} 각 유효성 검사 결과에 대한 플래그를 포함하는 객체
-         */
-        function updateSettingsMessageBoard(currentTotalCharCount, currentTotalLineCount, currentTotalWordCount, lines) {
-            const lang = translations[currentLanguage];
-            let messages = []; // 메시지 배열
-            let hasWarning = false; // 경고 여부 플래그
-
-            const maxCharTotal = parseFloat(maxCharTotalInput.value);
-            const maxCharLine = parseFloat(maxCharLineInput.value);
-            const maxLine = parseFloat(maxLineInput.value);
-            const maxWords = parseFloat(maxWordsInput.value);
-
-            // 각 유효성 검사 결과 플래그
-            let isMaxCharTotalExceeded = false;
-            let isMaxCharLineExceeded = false;
-            let isMaxLinesExceeded = false;
-            let isMaxWordsExceeded = false;
-
-            // Check if any setting input has a value
-            const anySettingEntered = !isNaN(maxCharTotal) || !isNaN(maxCharLine) || !isNaN(maxLine) || !isNaN(maxWords);
-
-            if (!settingsEnabled) {
-                settingsMessageBoard.textContent = ''; // 설정 비활성화 시 메시지 숨김
-                settingsMessageBoard.classList.remove('warning-message');
-                return { isMaxCharTotalExceeded, isMaxCharLineExceeded, isMaxLinesExceeded, isMaxWordsExceeded }; // 플래그 반환
+                }
             }
 
-            // Validate Max Total Characters
-            if (!isNaN(maxCharTotal) && currentTotalCharCount > maxCharTotal) {
-                messages.push(lang.maxCharTotalExceeded);
-                isMaxCharTotalExceeded = true;
-                hasWarning = true;
+            /**
+             * 문자 카운트 모드 드롭다운의 텍스트와 옵션을 업데이트합니다.
+             */
+            function updateCountingModeDropdownOptions() {
+                const lang = translations[currentLanguage];
+                if (dom.currentCountingModeText) {
+                    dom.currentCountingModeText.textContent = lang.countingModes[countingMode];
+                }
+
+                if (dom.countingModeDropdown) {
+                    const countingModeDropdownContent = dom.countingModeDropdown.querySelector('.py-1');
+                    if (countingModeDropdownContent) {
+                        countingModeDropdownContent.innerHTML = '';
+                        for (const modeKey in lang.countingModes) {
+                            const modeText = lang.countingModes[modeKey];
+                            const a = document.createElement('a');
+                            a.href = "#";
+                            a.classList.add('text-gray-700', 'block', 'px-4', 'py-2', 'text-sm', 'hover:bg-gray-100', 'rounded-md');
+                            a.setAttribute('role', 'menuitem');
+                            a.setAttribute('tabindex', '-1');
+                            a.setAttribute('data-mode', modeKey);
+                            a.textContent = modeText;
+                            countingModeDropdownContent.appendChild(a);
+                        }
+                    }
+                }
             }
 
-            // Validate Max Characters Per Line (check each line)
-            let exceedingLineCount = 0; // 초과하는 행의 개수를 세는 변수
-            if (!isNaN(maxCharLine)) {
-                for (let i = 0; i < lines.length; i++) {
-                    if (calculateLength(lines[i]) > maxCharLine) {
-                        exceedingLineCount++;
-                        isMaxCharLineExceeded = true;
+            /**
+             * 앱의 모든 UI 텍스트를 현재 선택된 언어로 업데이트합니다.
+             */
+            function updateUITexts() {
+                const lang = translations[currentLanguage];
+
+                dom.appTitle && (dom.appTitle.textContent = lang.appTitle);
+                dom.textInput && (dom.textInput.placeholder = lang.placeholder);
+                dom.totalCharCountTitle && (dom.totalCharCountTitle.textContent = lang.charCountLabel);
+                dom.totalLineCountTitle && (dom.totalLineCountTitle.textContent = lang.lineCountLabel);
+                dom.lineCharCountsTitle && (dom.lineCharCountsTitle.textContent = lang.lineCharCountTitle);
+                dom.noTextPrompt && (dom.noTextPrompt.textContent = lang.noTextPrompt);
+                dom.exclusionOptionsTitle && (dom.exclusionOptionsTitle.textContent = lang.exclusionOptionsTitle);
+                dom.labelExcludeAngleBrackets && (dom.labelExcludeAngleBrackets.textContent = lang.angleBracketExclusionLabel);
+                dom.labelExcludeSquareBrackets && (dom.labelExcludeSquareBrackets.textContent = lang.squareBracketExclusionLabel);
+                dom.labelExcludeCurlyBrackets && (dom.labelExcludeCurlyBrackets.textContent = lang.curlyBracketExclusionLabel); // NEW: Curly Brackets label
+                dom.labelExcludeSpaces && (dom.labelExcludeSpaces.textContent = lang.spaceExclusionLabel);
+                dom.labelExcludeNewlines && (dom.labelExcludeNewlines.textContent = lang.newlineExclusionLabel);
+                dom.settingsLabel && (dom.settingsLabel.textContent = lang.settingsLabel);
+                dom.maxCharTotalLabel && (dom.maxCharTotalLabel.textContent = lang.maxCharTotalLabel);
+                dom.maxCharLineLabel && (dom.maxCharLineLabel.textContent = lang.maxCharLineLabel);
+                dom.maxLineLabel && (dom.maxLineLabel.textContent = lang.maxLineLabel);
+                dom.maxWordsLabel && (dom.maxWordsLabel.textContent = lang.maxWordsLabel);
+                dom.countingModeLabel && (dom.countingModeLabel.textContent = lang.countingModeLabel);
+
+                if (dom.maxWordsSettingContainer) {
+                    if (lang.wordCountSupported) {
+                        dom.maxWordsSettingContainer.classList.remove('hidden');
+                    } else {
+                        dom.maxWordsSettingContainer.classList.add('hidden');
+                    }
+                }
+                dom.currentLanguageText && (dom.currentLanguageText.textContent = lang.langName);
+            }
+
+            /**
+             * 설정 메시지 보드를 업데이트하고 유효성 검사를 수행합니다.
+             */
+            function updateSettingsMessageBoard(currentTotalCharCount, currentTotalLineCount, currentTotalWordCount) {
+                const lang = translations[currentLanguage];
+                let messages = [];
+                let hasWarning = false;
+
+                const maxCharTotal = dom.maxCharTotalInput ? parseFloat(dom.maxCharTotalInput.value) : NaN;
+                const maxCharLine = dom.maxCharLineInput ? parseFloat(dom.maxCharLineInput.value) : NaN;
+                const maxLine = dom.maxLineInput ? parseFloat(dom.maxLineInput.value) : NaN;
+                const maxWords = dom.maxWordsInput ? parseFloat(dom.maxWordsInput.value) : NaN;
+
+                const anySettingEntered = !isNaN(maxCharTotal) || !isNaN(maxCharLine) || !isNaN(maxLine) || !isNaN(maxWords);
+
+                if (!settingsEnabled) {
+                    if (dom.settingsMessageBoard) {
+                        dom.settingsMessageBoard.textContent = '';
+                        dom.settingsMessageBoard.classList.remove('warning-message');
+                    }
+                    return;
+                }
+
+                if (!isNaN(maxCharTotal) && currentTotalCharCount > maxCharTotal) {
+                    messages.push(lang.maxCharTotalExceeded);
+                    hasWarning = true;
+                }
+
+                // 행별 문자 수 초과 메시지 추가
+                if (!isNaN(maxCharLine)) {
+                    let exceedingLineCount = 0;
+                    const rawLinesForLineCharCheck = dom.textInput?.value.split('\n') || [];
+                    rawLinesForLineCharCheck.forEach(rawLine => {
+                        let processedLineForCharCount = removeTags(rawLine);
+                        if (excludeSpaces) {
+                            processedLineForCharCount = removeSpaces(processedLineForCharCount);
+                        }
+                        if (calculateLength(processedLineForCharCount) > maxCharLine) {
+                            exceedingLineCount++;
+                        }
+                    });
+                    if (exceedingLineCount > 0) {
+                        messages.push(lang.maxCharLineExceeded.replace('{count}', exceedingLineCount));
                         hasWarning = true;
                     }
                 }
-                if (exceedingLineCount > 0) {
-                    // 초과하는 행이 있을 경우에만 메시지 추가
-                    messages.push(lang.maxCharLineExceeded.replace('{count}', exceedingLineCount));
+
+                // 최대 줄 수 초과 메시지 추가
+                if (!isNaN(maxLine) && currentTotalLineCount > maxLine) {
+                    messages.push(lang.maxLineExceeded);
+                    hasWarning = true;
+                }
+
+                if (lang.wordCountSupported && !isNaN(maxWords) && currentTotalWordCount > maxWords) {
+                    messages.push(lang.maxWordsExceeded);
+                    hasWarning = true;
+                }
+
+                if (dom.settingsMessageBoard) {
+                    if (messages.length === 0) {
+                        dom.settingsMessageBoard.textContent = anySettingEntered ? '' : lang.settingsPrompt;
+                        dom.settingsMessageBoard.classList.remove('warning-message');
+                    } else {
+                        dom.settingsMessageBoard.innerHTML = messages.join('<br>');
+                        dom.settingsMessageBoard.classList.add('warning-message');
+                    }
                 }
             }
 
-            // Validate Max Lines
-            if (!isNaN(maxLine) && currentTotalLineCount > maxLine) {
-                messages.push(lang.maxLineExceeded);
-                isMaxLinesExceeded = true;
-                hasWarning = true;
-            }
+            /**
+             * 텍스트 영역 아래 강조/제외 텍스트 표시 영역을 업데이트합니다.
+             * 원본 텍스트에서 태그가 제외되지 않았다면 강조 표시하고,
+             * 태그가 제외되었다면 제외된 내용만 표시합니다.
+             */
+            function updateHighlightedTextDisplay(rawInputText) {
+                if (!dom.highlightedTextDisplay) return;
 
-            // Validate Max Words (only if supported and entered)
-            if (lang.wordCountSupported && !isNaN(maxWords) && currentTotalWordCount > maxWords) {
-                messages.push(lang.maxWordsExceeded);
-                isMaxWordsExceeded = true;
-                hasWarning = true;
-            }
+                let outputText = rawInputText; // Start with the raw text
 
-            if (messages.length === 0) { // 경고 메시지가 없는 경우
-                if (!anySettingEntered) {
-                    settingsMessageBoard.textContent = lang.settingsPrompt;
-                    settingsMessageBoard.classList.remove('warning-message');
+                // 1. 모든 HTML 특수 문자를 HTML 엔티티로 변환하여 텍스트로 표시되도록 합니다.
+                // 이 단계에서 <br> 같은 태그는 &lt;br&gt;로 변환됩니다.
+                outputText = outputText.replace(/&/g, '&amp;')
+                                      .replace(/</g, '&lt;')
+                                      .replace(/>/g, '&gt;')
+                                      .replace(/"/g, '&quot;')
+                                      .replace(/'/g, '&#039;');
+
+
+                // 2. 이제 변환된 텍스트에서 원하는 태그 패턴을 찾아 색상 강조 또는 제거를 적용합니다.
+                // 정규식에 HTML 엔티티를 포함하여 매칭하도록 수정합니다.
+                // 예를 들어, <> 태그는 &lt;tag&gt; 형태가 됩니다.
+
+                // <> 태그 처리
+                if (dom.excludeAngleBrackets.checked) {
+                    // 제외 옵션이 켜져 있으면, 태그를 제거 (HTML 엔티티 포함)
+                    outputText = outputText.replace(/&lt;[^&]*?&gt;/g, '');
                 } else {
-                    settingsMessageBoard.textContent = ''; // 설정이 입력되었지만 초과하지 않은 경우 메시지 없음
-                    settingsMessageBoard.classList.remove('warning-message');
+                    // 제외 옵션이 꺼져 있으면, 태그에 빨간색 강조 적용
+                    outputText = outputText.replace(/(&lt;[^&]*?&gt;)/g, '<span class="highlight-red-inline">$1</span>');
                 }
-            } else {
-                settingsMessageBoard.innerHTML = messages.join('<br>'); // HTML로 삽입하여 줄바꿈 적용
-                // 경고 메시지 스타일 적용
-                settingsMessageBoard.classList.add('warning-message');
-            }
 
-            return { isMaxCharTotalExceeded, isMaxCharLineExceeded, isMaxLinesExceeded, isMaxWordsExceeded };
-        }
-
-
-        /**
-         * 앱의 모든 UI 텍스트를 현재 선택된 언어로 업데이트하는 함수입니다.
-         */
-        function updateLanguage() {
-            const lang = translations[currentLanguage];
-
-            appTitle.textContent = lang.appTitle;
-            inputLabel.textContent = lang.inputLabel;
-            textInput.placeholder = lang.placeholder;
-            totalCharCountTitle.textContent = lang.charCountLabel;
-            totalLineCountTitle.textContent = lang.lineCountLabel;
-            lineCharCountsTitle.textContent = lang.lineCharCountTitle;
-            noTextPrompt.textContent = lang.noTextPrompt;
-            tagExclusionLabel.textContent = lang.tagExclusionLabel;
-            spaceExclusionLabel.textContent = lang.spaceExclusionLabel;
-            settingsLabel.textContent = lang.settingsLabel;
-            maxCharTotalLabel.textContent = lang.maxCharTotalLabel;
-            maxCharLineLabel.textContent = lang.maxCharLineLabel; // Corrected: Assign label text to label element
-            maxLineLabel.textContent = lang.maxLineLabel;
-            maxWordsLabel.textContent = lang.maxWordsLabel;
-            // settingsMessageBoard.textContent = lang.settingsPrompt; // 초기 설정 메시지는 updateSettingsMessageBoard에서 처리
-
-            // 드롭다운 콘텐츠 업데이트
-            updateLanguageDropdownOptions();
-            updateCountingModeDropdownText();
-
-            // 언어에 따라 최대 단어 수 설정 필드 가시성 관리
-            if (lang.wordCountSupported) {
-                maxWordsSettingContainer.classList.remove('hidden');
-            } else {
-                maxWordsSettingContainer.classList.add('hidden');
-            }
-
-            // 새로운 언어 설정에 따라 카운트 재계산 및 메시지 업데이트
-            updateCounts();
-
-            // 현재 언어 버튼 텍스트 업데이트
-            currentLanguageText.textContent = lang.langName;
-        }
-
-        // 이벤트 리스너
-        textInput.addEventListener('input', updateCounts);
-
-        // 언어 토글 버튼 클릭
-        languageToggleButton.addEventListener('click', (event) => {
-            event.stopPropagation();
-            languageDropdown.classList.toggle('hidden');
-            countingModeDropdown.classList.add('hidden');
-        });
-
-        // 언어 드롭다운 메뉴 항목 클릭
-        languageDropdown.addEventListener('click', (event) => {
-            event.preventDefault();
-            const selectedLang = event.target.dataset.lang;
-            if (selectedLang && translations[selectedLang]) {
-                currentLanguage = selectedLang;
-                updateLanguage();
-                languageDropdown.classList.add('hidden');
-            }
-        });
-
-        // 문자 카운트 모드 토글 버튼 클릭
-        countingModeToggleButton.addEventListener('click', (event) => {
-            event.stopPropagation();
-            countingModeDropdown.classList.toggle('hidden');
-            languageDropdown.classList.add('hidden');
-        });
-
-        // 문자 카운트 모드 드롭다운 메뉴 항목 클릭
-        countingModeDropdown.addEventListener('click', (event) => {
-            event.preventDefault();
-            const selectedMode = event.target.dataset.mode;
-            if (selectedMode) {
-                countingMode = selectedMode;
-                updateLanguage(); // 모드 텍스트 및 카운트 업데이트
-                countingModeDropdown.classList.add('hidden');
-            }
-        });
-
-        // 태그 제외 체크박스 변경
-        toggleTagExclusionCheckbox.addEventListener('change', () => {
-            excludeTags = toggleTagExclusionCheckbox.checked;
-            updateCounts();
-        });
-
-        // 공백 제외 체크박스 변경
-        toggleSpaceExclusionCheckbox.addEventListener('change', () => {
-            excludeSpaces = toggleSpaceExclusionCheckbox.checked;
-            updateCounts();
-        });
-
-        // 설정 토글 체크박스 변경
-        toggleSettingsCheckbox.addEventListener('change', () => {
-            settingsEnabled = toggleSettingsCheckbox.checked;
-            if (settingsEnabled) {
-                settingsContainer.classList.remove('hidden');
-                // 설정 활성화 시 최대 단어 수 설정 필드 가시성 다시 확인
-                if (translations[currentLanguage].wordCountSupported) {
-                    maxWordsSettingContainer.classList.remove('hidden');
+                // [] 태그 처리
+                if (dom.excludeSquareBrackets.checked) {
+                    // 제외 옵션이 켜져 있으면, 태그를 제거
+                    outputText = outputText.replace(/\[[^\]]*?\]/g, '');
                 } else {
-                    maxWordsSettingContainer.classList.add('hidden');
+                    // 제외 옵션이 꺼져 있으면, 태그에 하늘색 강조 적용
+                    outputText = outputText.replace(/(\[[^\]]*?\])/g, '<span class="highlight-blue-inline">$1</span>');
                 }
-            } else {
-                settingsContainer.classList.add('hidden');
-                settingsMessageBoard.textContent = ''; // 설정 비활성화 시 메시지 지우기
-                settingsMessageBoard.classList.remove('warning-message');
+
+                // {} 태그 처리
+                if (dom.excludeCurlyBrackets.checked) {
+                    // 제외 옵션이 켜져 있으면, 태그를 제거
+                    outputText = outputText.replace(/\{[^}]*?\}/g, '');
+                } else {
+                    // 제외 옵션이 꺼져 있으면, 태그에 보라색 강조 적용
+                    outputText = outputText.replace(/(\{[^}]*?\})/g, '<span class="highlight-purple-inline">$1</span>');
+                }
+
+                // 3. 공백 및 개행 문자 처리
+                if (dom.excludeNewlines.checked) {
+                    outputText = outputText.replace(/\n/g, ' ');
+                }
+
+                if (dom.excludeSpaces.checked) {
+                    outputText = outputText.replace(/\s+/g, '');
+                } else {
+                    // 공백을 제외하지 않는 경우, 여러 공백을 하나의 공백으로 정규화
+                    // trim()은 마지막에 호출하여 전체 문자열의 양 끝 공백을 제거
+                    outputText = outputText.replace(/\s+/g, ' ').trim();
+                }
+
+                dom.highlightedTextDisplay.innerHTML = outputText;
             }
-            // 설정 상태 변경 시에도 카운트를 업데이트하여 메시지 보드에 반영
-            updateCounts();
+
+
+            /**
+             * 행별 문자 수 표시 영역을 업데이트합니다.
+             */
+            function updateLineCharCountsDisplay() {
+                const lang = translations[currentLanguage];
+                if (dom.lineCharCounts) {
+                    dom.lineCharCounts.innerHTML = '';
+
+                    const originalLines = dom.textInput?.value.split('\n') || [];
+
+                    if (originalLines.length === 0 || (originalLines.length === 1 && originalLines[0].trim() === '')) {
+                        dom.noTextPrompt && dom.lineCharCounts.appendChild(dom.noTextPrompt);
+                    } else {
+                        originalLines.forEach((originalLine, index) => {
+                            let lineForCounting = originalLine;
+                            if (excludeAngleBrackets) { lineForCounting = lineForCounting.replace(/<[^>]*>/g, ''); }
+                            if (excludeSquareBrackets) { lineForCounting = lineForCounting.replace(/\[[^\]]*\]/g, ''); }
+                            if (excludeCurlyBrackets) { lineForCounting = lineForCounting.replace(/\{[^}]*\}/g, ''); }
+                            if (excludeSpaces) { lineForCounting = lineForCounting.replace(/\s/g, ''); }
+                            if (excludeNewlines) { lineForCounting = lineForCounting.replace(/\n/g, ''); }
+
+                            const lineElement = document.createElement('p');
+                            // 텍스트를 구성할 때 linePrefix와 charUnit을 사용하여 다국어 지원
+                            lineElement.textContent = `${index + 1}${lang.linePrefix}: ${calculateLength(lineForCounting)} ${lang.charUnit}`;
+
+                            // 기존 강조 클래스 제거 (텍스트 색상 및 배경색)
+                            lineElement.classList.remove('highlight-red-text', 'bg-highlight-blue', 'bg-highlight-green');
+
+                            if (settingsEnabled) {
+                                const maxCharLine = dom.maxCharLineInput ? parseFloat(dom.maxCharLineInput.value) : NaN;
+                                const maxLine = dom.maxLineInput ? parseFloat(dom.maxLineInput.value) : NaN;
+
+                                const currentLineCharCount = calculateLength(lineForCounting);
+                                const isCurrentLineExceedingMaxCharLine = !isNaN(maxCharLine) && currentLineCharCount > maxCharLine;
+                                const isCurrentLineExceedingMaxLines = !isNaN(maxLine) && (index + 1) > maxLine;
+
+                                // 2. 세부 설정했을 때
+                                // 1) 행 수를 초과할 때: 해당 부분의 텍스트는 "빨간색"으로, 배경색은 "연한 녹색"으로
+                                if (isCurrentLineExceedingMaxLines) {
+                                    lineElement.classList.add('highlight-red-text', 'bg-highlight-green');
+                                }
+                                // 2) 행별 문자 수를 초과할 때: 해당 부분의 텍스트는 "빨간색"으로, 배경색은 "연한 파란색"으로
+                                else if (isCurrentLineExceedingMaxCharLine) { // else if를 사용하여 둘 중 하나만 적용되도록
+                                    lineElement.classList.add('highlight-red-text', 'bg-highlight-blue');
+                                }
+                                // 그 외의 세부 설정 활성화 시 행은 기본색상
+                            } else {
+                                // 1. 세부 설정을 하지 않았을 때: 행별 문자 수에 표시되는 모든 텍스트는 검은색으로 표시되며, 바탕색도 없어요.
+                                // 이 경우 아무 클래스도 추가하지 않아 기본 검은색 텍스트와 배경 없음 유지
+                            }
+                            
+                            lineElement.classList.add('py-1', 'border-b', 'border-yellow-100', 'last:border-b-0');
+                            dom.lineCharCounts.appendChild(lineElement);
+                        });
+                    }
+                }
+            }
+
+            /**
+             * 모든 카운트(문자, 줄, 단어)를 계산하고 UI를 업데이트하는 메인 함수입니다.
+             */
+            function updateCounts() {
+                const lang = translations[currentLanguage];
+                const rawInputText = dom.textInput?.value || '';
+
+                // --- 1. Total Character Count ---
+                let textForTotalCharCount = removeTags(rawInputText);
+                if (excludeSpaces) {
+                    textForTotalCharCount = removeSpaces(textForTotalCharCount);
+                }
+                // 개행 제외 옵션이 켜져 있을 때만 개행 문자를 빈 문자열로 대체 (길이 계산을 위함)
+                let textForLengthCalculation = textForTotalCharCount;
+                if (excludeNewlines) {
+                    textForLengthCalculation = removeNewlines(textForLengthCalculation); // Use removeNewlines which replaces \n with '' for COUNTING
+                }
+
+                const currentTotalCharCount = calculateLength(textForLengthCalculation);
+                dom.totalCharCount && (dom.totalCharCount.textContent = currentTotalCharCount);
+                dom.totalCharCountTitle && (dom.totalCharCountTitle.textContent = `${lang.charCountLabel} (${lang.countingModes[countingMode]})`);
+
+                // "최대 줄 수나, 최대 워드 수 설정에 따른 색상 변경은 없어요."
+                // 이전에 있던 전체 문자 수 초과 시 배경색 변경 로직을 제거
+                const totalCharCountBox = dom.totalCharCount.closest('.bg-blue-50');
+                if (totalCharCountBox) {
+                    totalCharCountBox.classList.remove('bg-highlight-red'); // 항상 제거
+                }
+
+
+                // --- 2. Total Line Count ---
+                const originalLines = rawInputText.split('\n');
+                const currentTotalLineCount = originalLines.length;
+                dom.totalLineCount && (dom.totalLineCount.textContent = currentTotalLineCount);
+                dom.totalLineCountTitle && (dom.totalLineCountTitle.textContent = lang.lineCountLabel);
+
+                // --- 3. Word Count ---
+                // For word count, newlines should act as delimiters but not be part of words.
+                // So, we only remove tags, but NOT newlines from textForWordCount.
+                let textForWordCount = removeTags(rawInputText);
+                let currentTotalWordCount = 0;
+                if (lang.wordCountSupported) {
+                    // Split by any whitespace (including newlines) and filter out empty strings
+                    const words = textForWordCount.split(/\s+/).filter(word => word.length > 0);
+                    currentTotalWordCount = words.length;
+                    dom.totalWordCount && (dom.totalWordCount.textContent = currentTotalWordCount);
+                    dom.wordCountContainer && dom.wordCountContainer.classList.remove('hidden');
+                    dom.totalWordCountTitle && (dom.totalWordCountTitle.textContent = lang.wordCountLabel);
+                } else {
+                    dom.wordCountContainer && dom.wordCountContainer.classList.add('hidden');
+                }
+
+                // --- Update Settings Message Board and Line-by-Line Display ---
+                updateSettingsMessageBoard(currentTotalCharCount, currentTotalLineCount, currentTotalWordCount); // Pass all relevant counts
+                updateLineCharCountsDisplay(); // This function now internally gets lines from textInput.value
+
+                // 텍스트 영역에 시각적 강조를 위한 새로운 로직 적용 (textarea의 한계로 div를 사용)
+                updateHighlightedTextDisplay(rawInputText);
+            }
+
+            /**
+             * 앱의 모든 UI 텍스트와 드롭다운 옵션을 업데이트합니다.
+             */
+            function updateLanguage() {
+                updateUITexts();
+                updateLanguageDropdownOptions();
+                updateCountingModeDropdownOptions();
+                updateCounts(); // 언어 변경 시 카운트 재계산 및 메시지 업데이트
+            }
+
+            // --- Event Listeners ---
+            function attachEventListeners() {
+                dom.textInput?.addEventListener('input', updateCounts);
+
+                dom.languageToggleButton?.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    dom.languageDropdown?.classList.toggle('hidden');
+                    dom.countingModeDropdown?.classList.add('hidden');
+                });
+
+                dom.languageDropdown?.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const selectedLang = event.target.dataset.lang;
+                    if (selectedLang && translations[selectedLang]) {
+                        currentLanguage = selectedLang;
+                        updateLanguage();
+                        dom.languageDropdown?.classList.add('hidden');
+                    }
+                });
+
+                dom.countingModeToggleButton?.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    dom.countingModeDropdown?.classList.toggle('hidden');
+                    dom.languageDropdown?.classList.add('hidden');
+                });
+
+                dom.countingModeDropdown?.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const selectedMode = event.target.dataset.mode;
+                    if (selectedMode) {
+                        countingMode = selectedMode;
+                        updateLanguage();
+                        dom.countingModeDropdown?.classList.add('hidden');
+                    }
+                });
+
+                // 새로운 `updateExclusionLabelColors` 함수를 호출하도록 변경
+                dom.excludeAngleBrackets?.addEventListener('change', () => {
+                    excludeAngleBrackets = dom.excludeAngleBrackets.checked;
+                    updateCounts();
+                    updateExclusionLabelColors(); // 상태 변경 시 라벨 색상 업데이트
+                });
+
+                dom.excludeSquareBrackets?.addEventListener('change', () => {
+                    excludeSquareBrackets = dom.excludeSquareBrackets.checked;
+                    updateCounts();
+                    updateExclusionLabelColors(); // 상태 변경 시 라벨 색상 업데이트
+                });
+
+                dom.excludeCurlyBrackets?.addEventListener('change', () => {
+                    excludeCurlyBrackets = dom.excludeCurlyBrackets.checked;
+                    updateCounts();
+                    updateExclusionLabelColors(); // 상태 변경 시 라벨 색상 업데이트
+                });
+
+                dom.excludeSpaces?.addEventListener('change', () => {
+                    excludeSpaces = dom.excludeSpaces.checked;
+                    updateCounts();
+                    updateExclusionLabelColors(); // 상태 변경 시 라벨 색상 업데이트
+                });
+
+                dom.excludeNewlines?.addEventListener('change', () => {
+                    excludeNewlines = dom.excludeNewlines.checked;
+                    updateCounts();
+                    updateExclusionLabelColors(); // 상태 변경 시 라벨 색상 업데이트
+                });
+
+                dom.toggleSettings?.addEventListener('change', () => {
+                    settingsEnabled = dom.toggleSettings.checked;
+                    if (settingsEnabled) {
+                        dom.settingsContainer?.classList.remove('hidden');
+                        if (translations[currentLanguage].wordCountSupported) {
+                            dom.maxWordsSettingContainer?.classList.remove('hidden');
+                        } else {
+                            dom.maxWordsSettingContainer?.classList.add('hidden');
+                        }
+                    } else {
+                        dom.settingsContainer?.classList.add('hidden');
+                        dom.settingsMessageBoard && (dom.settingsMessageBoard.textContent = '');
+                        dom.settingsMessageBoard?.classList.remove('warning-message');
+                        // 설정 해제 시 모든 강조 클래스 제거
+                        dom.totalCharCount.closest('.bg-blue-50')?.classList.remove('bg-highlight-red'); // 전체 문자 수 박스 강조 제거
+                        document.querySelectorAll('#lineCharCounts p').forEach(p => {
+                            p.classList.remove('highlight-red-text', 'bg-highlight-blue', 'bg-highlight-green', 'bg-highlight-red'); // 모든 강조 클래스 제거
+                        });
+                    }
+                    updateCounts(); // 설정 상태 변경 시 카운트 및 메시지 업데이트
+                });
+
+                dom.maxCharTotalInput?.addEventListener('input', updateCounts);
+                dom.maxCharLineInput?.addEventListener('input', updateCounts);
+                dom.maxLineInput?.addEventListener('input', updateCounts);
+                dom.maxWordsInput?.addEventListener('input', updateCounts);
+
+                document.addEventListener('click', (event) => {
+                    if (dom.languageSelector && !dom.languageSelector.contains(event.target)) {
+                        dom.languageDropdown?.classList.add('hidden');
+                    }
+                    if (dom.countingModeSelector && !dom.countingModeSelector.contains(event.target)) {
+                        dom.countingModeDropdown?.classList.add('hidden');
+                    }
+                });
+            }
+
+            /**
+             * 제외 옵션 라벨의 배경색과 텍스트 색상을 업데이트하는 함수 (선택 여부에 따라)
+             */
+            function updateExclusionLabelColors() {
+                const exclusionLabels = document.querySelectorAll('.exclusion-label');
+                exclusionLabels.forEach(label => {
+                    const checkbox = label.querySelector('input[type="checkbox"]');
+                    if (checkbox) {
+                        // 모든 색상 클래스 초기화
+                        label.classList.remove(
+                            'bg-pink-500', 'border-pink-600', 'text-white', 'hover:bg-pink-600',
+                            'bg-sky-400', 'border-sky-500', 'text-white', 'hover:bg-sky-500',
+                            'bg-purple-500', 'border-purple-600', 'text-white', 'hover:bg-purple-600',
+                            'bg-gray-900', 'border-gray-950', 'text-white', 'hover:bg-gray-950',
+                            'bg-red-300', 'border-red-500', 'text-red-500', 'hover:bg-red-400',
+                            'bg-blue-300', 'border-blue-500', 'text-blue-500', 'hover:bg-blue-400',
+                            'bg-purple-300', 'border-purple-500', 'text-purple-500', 'hover:bg-purple-400',
+                            'bg-gray-200', 'border-gray-300', 'text-gray-700', 'hover:bg-gray-300', // 기본 회색 (선택 안 된 기본값)
+                            'bg-gray-200', 'border-gray-400', 'text-gray-400', 'hover:bg-gray-300' // 톤다운된 회색 (선택 안 된 공백/개행)
+                        );
+                        label.querySelector('span').classList.remove(
+                            'text-white', 'text-red-500', 'text-blue-500', 'text-purple-500', 'text-gray-700', 'text-gray-400'
+                        );
+
+
+                        if (checkbox.checked) {
+                            // 선택된 상태
+                            if (checkbox.id === 'excludeAngleBrackets') {
+                                label.classList.add('bg-pink-500', 'border-pink-600', 'text-white', 'hover:bg-pink-600');
+                                label.querySelector('span').classList.add('text-white');
+                            } else if (checkbox.id === 'excludeSquareBrackets') {
+                                label.classList.add('bg-sky-400', 'border-sky-500', 'text-white', 'hover:bg-sky-500');
+                                label.querySelector('span').classList.add('text-white');
+                            } else if (checkbox.id === 'excludeCurlyBrackets') {
+                                label.classList.add('bg-purple-500', 'border-purple-600', 'text-white', 'hover:bg-purple-600');
+                                label.querySelector('span').classList.add('text-white');
+                            } else if (checkbox.id === 'excludeSpaces' || checkbox.id === 'excludeNewlines') {
+                                label.classList.add('bg-gray-900', 'border-gray-950', 'text-white', 'hover:bg-gray-950');
+                                label.querySelector('span').classList.add('text-white');
+                            }
+                        } else {
+                            // 선택 안 된 상태 (톤다운된 색상)
+                            if (checkbox.id === 'excludeAngleBrackets') {
+                                label.classList.add('bg-red-300', 'border-red-500', 'text-red-500', 'hover:bg-red-400');
+                                label.querySelector('span').classList.add('text-red-500');
+                            } else if (checkbox.id === 'excludeSquareBrackets') {
+                                label.classList.add('bg-blue-300', 'border-blue-500', 'text-blue-500', 'hover:bg-blue-400');
+                                label.querySelector('span').classList.add('text-blue-500');
+                            } else if (checkbox.id === 'excludeCurlyBrackets') {
+                                label.classList.add('bg-purple-300', 'border-purple-500', 'text-purple-500', 'hover:bg-purple-400');
+                                label.querySelector('span').classList.add('text-purple-500');
+                            } else if (checkbox.id === 'excludeSpaces' || checkbox.id === 'excludeNewlines') {
+                                label.classList.add('bg-gray-200', 'border-gray-400', 'text-gray-400', 'hover:bg-gray-300');
+                                label.querySelector('span').classList.add('text-gray-400');
+                            }
+                        }
+                    }
+                });
+            }
+
+
+            // --- Initialization ---
+            function initializeApp() {
+                // 빌드 날짜 설정 (고정된 텍스트)
+                dom.buildVersionDate && (dom.buildVersionDate.textContent = `Ver. 2.6 2025-08-10`); // 버전 업데이트
+
+                // 기본 체크박스 상태 설정
+                dom.excludeAngleBrackets && (dom.excludeAngleBrackets.checked = true);
+                dom.excludeSquareBrackets && (dom.excludeSquareBrackets.checked = true);
+                dom.excludeCurlyBrackets && (dom.excludeCurlyBrackets.checked = true);
+                dom.excludeSpaces && (dom.excludeSpaces.checked = false);
+                dom.excludeNewlines && (dom.excludeNewlines.checked = true); 
+                dom.toggleSettings && (dom.toggleSettings.checked = false); // 세부 설정 기본은 비활성화
+
+                // 초기 `excludeNewlines`, `excludeSpaces`, `excludeCurlyBrackets` 변수 값 업데이트
+                excludeNewlines = dom.excludeNewlines.checked;
+                excludeSpaces = dom.excludeSpaces.checked;
+                excludeCurlyBrackets = dom.excludeCurlyBrackets.checked;
+
+
+                updateLanguage(); // 초기 언어 설정 및 UI 업데이트
+                attachEventListeners(); // 모든 이벤트 리스너 연결
+                updateExclusionLabelColors(); // 초기 제외 옵션 라벨 색상 설정
+            }
+
+            initializeApp(); // 앱 초기화 함수 호출
         });
-
-        // 설정 입력 필드 변경 시 카운트 업데이트 (유효성 검사 메시지 반영)
-        maxCharTotalInput.addEventListener('input', updateCounts);
-        maxCharLineInput.addEventListener('input', updateCounts);
-        maxLineInput.addEventListener('input', updateCounts);
-        maxWordsInput.addEventListener('input', updateCounts);
-
-
-        // 드롭다운 외부 클릭 시 숨기기
-        document.addEventListener('click', (event) => {
-            if (!languageSelector.contains(event.target)) {
-                languageDropdown.classList.add('hidden');
-            }
-            if (!countingModeSelector.contains(event.target)) {
-                countingModeDropdown.classList.add('hidden');
-            }
-        });
-
-        // 페이지 로드 시 초기 업데이트
-        // 빌드 날짜 설정
-        const today = new Date();
-        const yyyy = today.getFullYear();
-        const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months start at 0!
-        const dd = String(today.getDate()).padStart(2, '0');
-        buildVersionDateElement.textContent = `Ver. 1.0-${yyyy}-${mm}-${dd}`;
-
-        // 기본 체크박스 상태 설정
-        toggleTagExclusionCheckbox.checked = true; // 기본: 태그 제외 켜짐
-        toggleSpaceExclusionCheckbox.checked = false; // 기본: 공백 제외 꺼짐
-        toggleSettingsCheckbox.checked = false; // 기본: 설정 꺼짐
-        updateLanguage(); // 초기 언어 설정 및 UI 업데이트
     </script>
 </body>
 </html>
