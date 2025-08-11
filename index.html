@@ -180,54 +180,41 @@
         }
 
 
-        /* 공백 - 검정 */
-        label:has(input[type="checkbox"]#excludeSpaces:checked) {
+        /* 공백 / 개행 / 특수문자 - 검정 */
+        label:has(input[type="checkbox"]#excludeSpaces:checked),
+        label:has(input[type="checkbox"]#excludeNewlines:checked),
+        label:has(input[type="checkbox"]#excludeSpecialCharacters:checked) { /* NEW */
             background-color: #1f2937; /* Gray 900 */
             border-color: #111827; /* Gray 950 */
             color: #ffffff;
         }
-        label:has(input[type="checkbox"]#excludeSpaces:checked):hover {
+        label:has(input[type="checkbox"]#excludeSpaces:checked):hover,
+        label:has(input[type="checkbox"]#excludeNewlines:checked):hover,
+        label:has(input[type="checkbox"]#excludeSpecialCharacters:checked):hover { /* NEW */
             background-color: #111827; /* Gray 950 */
         }
-        #excludeSpaces:checked ~ span {
+        #excludeSpaces:checked ~ span,
+        #excludeNewlines:checked ~ span,
+        #excludeSpecialCharacters:checked ~ span { /* NEW */
             color: #ffffff;
         }
-        /* 공백 - 톤다운된 연한 회색 (선택 안 됨) */
-        label:has(input[type="checkbox"]#excludeSpaces:not(:checked)).exclusion-label {
+
+        /* 공백 / 개행 / 특수문자 - 톤다운된 연한 회색 (선택 안 됨) */
+        label:has(input[type="checkbox"]#excludeSpaces:not(:checked)).exclusion-label,
+        label:has(input[type="checkbox"]#excludeNewlines:not(:checked)).exclusion-label,
+        label:has(input[type="checkbox"]#excludeSpecialCharacters:not(:checked)).exclusion-label { /* NEW */
             background-color: #e5e7eb; /* Gray 200 */
             border-color: #9ca3af; /* Gray 400 */
             color: #9ca3af; /* Gray 400 */
         }
-        label:has(input[type="checkbox"]#excludeSpaces:not(:checked)).exclusion-label:hover {
+        label:has(input[type="checkbox"]#excludeSpaces:not(:checked)).exclusion-label:hover,
+        label:has(input[type="checkbox"]#excludeNewlines:not(:checked)).exclusion-label:hover,
+        label:has(input[type="checkbox"]#excludeSpecialCharacters:not(:checked)).exclusion-label:hover { /* NEW */
             background-color: #d1d5db; /* Gray 300 */
         }
-        label:has(input[type="checkbox"]#excludeSpaces:not(:checked)).exclusion-label span {
-            color: #9ca3af; /* Gray 400 */
-        }
-
-
-        /* 개행 - 검정 */
-        label:has(input[type="checkbox"]#excludeNewlines:checked) {
-            background-color: #1f2937; /* Gray 900 */
-            border-color: #111827; /* Gray 950 */
-            color: #ffffff;
-        }
-        label:has(input[type="checkbox"]#excludeNewlines:checked):hover {
-            background-color: #111827; /* Gray 950 */
-        }
-        #excludeNewlines:checked ~ span {
-            color: #ffffff;
-        }
-        /* 개행 - 톤다운된 연한 회색 (선택 안 됨) */
-        label:has(input[type="checkbox"]#excludeNewlines:not(:checked)).exclusion-label {
-            background-color: #e5e7eb; /* Gray 200 */
-            border-color: #9ca3af; /* Gray 400 */
-            color: #9ca3af; /* Gray 400 */
-        }
-        label:has(input[type="checkbox"]#excludeNewlines:not(:checked)).exclusion-label:hover {
-            background-color: #d1d5db; /* Gray 300 */
-        }
-        label:has(input[type="checkbox"]#excludeNewlines:not(:checked)).exclusion-label span {
+        label:has(input[type="checkbox"]#excludeSpaces:not(:checked)).exclusion-label span,
+        label:has(input[type="checkbox"]#excludeNewlines:not(:checked)).exclusion-label span,
+        label:has(input[type="checkbox"]#excludeSpecialCharacters:not(:checked)).exclusion-label span { /* NEW */
             color: #9ca3af; /* Gray 400 */
         }
 
@@ -311,7 +298,7 @@
         <!-- Exclusion options section -->
         <div class="mb-6">
             <h2 id="exclusionOptionsTitle" class="text-lg font-bold text-gray-800 mb-4">제외 옵션</h2>
-            <div class="flex flex-wrap justify-center gap-4">
+            <div class="flex flex-wrap justify-center gap-4 mb-4"> <!-- First row of tags -->
                 <!-- Tag exclusion checkbox for angle brackets -->
                 <label class="exclusion-label flex items-center cursor-pointer px-4 py-2 rounded-full transition-colors duration-200 shadow-md">
                     <input type="checkbox" id="excludeAngleBrackets" class="form-checkbox h-5 w-5 text-blue-600 rounded" checked>
@@ -328,6 +315,13 @@
                 <label class="exclusion-label flex items-center cursor-pointer px-4 py-2 rounded-full transition-colors duration-200 shadow-md">
                     <input type="checkbox" id="excludeCurlyBrackets" class="form-checkbox h-5 w-5 text-blue-600 rounded" checked>
                     <span id="labelExcludeCurlyBrackets" class="ml-2 font-semibold">{} 태그</span>
+                </label>
+            </div>
+            <div class="flex flex-wrap justify-center gap-4"> <!-- Second row of special chars, spaces, newlines -->
+                <!-- Special Character exclusion checkbox (NEW) -->
+                <label class="exclusion-label flex items-center cursor-pointer px-4 py-2 rounded-full transition-colors duration-200 shadow-md">
+                    <input type="checkbox" id="excludeSpecialCharacters" class="form-checkbox h-5 w-5 text-blue-600 rounded">
+                    <span id="labelExcludeSpecialCharacters" class="ml-2 font-semibold">특수문자</span>
                 </label>
 
                 <!-- Space exclusion checkbox -->
@@ -419,6 +413,7 @@
                     'excludeAngleBrackets', 'labelExcludeAngleBrackets',
                     'excludeSquareBrackets', 'labelExcludeSquareBrackets',
                     'excludeCurlyBrackets', 'labelExcludeCurlyBrackets', // NEW: Curly Brackets
+                    'excludeSpecialCharacters', 'labelExcludeSpecialCharacters', // NEW: Special Characters
                     'excludeSpaces', 'labelExcludeSpaces',
                     'excludeNewlines', 'labelExcludeNewlines',
                     'toggleSettings', 'settingsLabel', 'settingsContainer', 'maxCharTotalInput',
@@ -447,6 +442,7 @@
             let excludeAngleBrackets = true;
             let excludeSquareBrackets = true;
             let excludeCurlyBrackets = true; // NEW: Curly Brackets exclusion state
+            let excludeSpecialCharacters = false; // NEW: Special Characters exclusion state (default: false)
             let excludeSpaces = false;
             let excludeNewlines = true; // Initial state set to true by default in the code
             let settingsEnabled = false;
@@ -462,13 +458,14 @@
                     linePrefix: '행',
                     charUnit: '문자',
                     noTextPrompt: '텍스트를 입력하면 각 행의 문자 수가 표시됩니다.',
-                    langName: '한국어',
+                    langName: '한국어', // Explicitly ensured for clarity
                     wordCountSupported: false,
                     wordCountLabel: '단어 수',
                     exclusionOptionsTitle: '제외 옵션',
                     angleBracketExclusionLabel: '<> 태그', // Updated label
                     squareBracketExclusionLabel: '[] 태그', // Updated label
                     curlyBracketExclusionLabel: '{} 태그', // NEW: Curly Brackets label
+                    specialCharExclusionLabel: '특수문자', // NEW: Special Characters label
                     spaceExclusionLabel: '공백',
                     newlineExclusionLabel: '개행',
                     settingsLabel: '세부 설정',
@@ -499,17 +496,19 @@
                     noTextPrompt: 'Enter text to see character counts per line.',
                     langName: 'English',
                     wordCountSupported: true,
+                    wordCountLabel: 'Words', // NEW: Added wordCountLabel for English
                     exclusionOptionsTitle: 'Exclusion Options',
                     angleBracketExclusionLabel: '<> Tags', // Updated label
                     squareBracketExclusionLabel: '[] Tags', // Updated label
                     curlyBracketExclusionLabel: '{} Tags', // NEW: Curly Brackets label
+                    specialCharExclusionLabel: 'Special Characters', // NEW: Special Characters label
                     spaceExclusionLabel: 'Spaces',
                     newlineExclusionLabel: 'Newlines',
                     settingsLabel: 'Detailed Settings',
                     maxCharTotalLabel: 'Max Characters (Total)',
                     maxCharLineLabel: 'Max Characters (Per Line)',
                     maxLineLabel: 'Max Lines',
-                    maxWordsLabel: 'Max Words',
+                    maxWordsLabel: 'Words', // This is still used for the input label
                     settingsPrompt: 'Please enter settings.',
                     countingModes: {
                         fullWidthBasis: 'Full-width Basis',
@@ -538,6 +537,7 @@
                     angleBracketExclusionLabel: '<>タグ',
                     squareBracketExclusionLabel: '[]タグ',
                     curlyBracketExclusionLabel: '{}タグ',
+                    specialCharExclusionLabel: '特殊文字', // NEW: Special Characters label
                     spaceExclusionLabel: '空白',
                     newlineExclusionLabel: '改行',
                     settingsLabel: '詳細設定',
@@ -562,41 +562,32 @@
             // --- Utility Functions ---
 
             /**
-             * 태그(<>, [], {})를 제거하는 함수입니다.
-             * @param {string} textString - 태그를 제거할 문자열
-             * @returns {string} 태그가 제거된 문자열
+             * 태그(<>, [], {}), 특수문자, 공백, 개행을 제거하는 함수입니다.
+             * 이 함수는 주로 문자 수 계산에 사용됩니다.
+             * @param {string} textString - 처리할 문자열
+             * @returns {string} 처리된 문자열
              */
-            function removeTags(textString) {
-                let cleanedString = textString;
+            function processTextForCounting(textString) {
+                let processedString = textString;
                 if (excludeAngleBrackets) {
-                    cleanedString = cleanedString.replace(/<[^>]*>/g, '');
+                    processedString = processedString.replace(/<[^>]*>/g, '');
                 }
                 if (excludeSquareBrackets) {
-                    cleanedString = cleanedString.replace(/\[[^\]]*\]/g, '');
+                    processedString = processedString.replace(/\[[^\]]*\]/g, '');
                 }
-                if (excludeCurlyBrackets) { // NEW: Curly Brackets exclusion
-                    cleanedString = cleanedString.replace(/\{[^}]*\}/g, '');
+                if (excludeCurlyBrackets) {
+                    processedString = processedString.replace(/\{[^}]*\}/g, '');
                 }
-                return cleanedString;
-            }
-
-            /**
-             * 공백을 제거하는 함수입니다.
-             * @param {string} textString - 공백을 제거할 문자열
-             * @returns {string} 공백이 제거된 문자열
-             */
-            function removeSpaces(textString) {
-                return textString.replace(/\s/g, '');
-            }
-
-            /**
-             * 개행 문자(\n)를 제거하는 함수입니다.
-             * @param {string} textString - 개행 문자를 제거할 문자열
-             * @returns {string} 개행 문자가 제거된 문자열
-             */
-            function removeNewlines(textString) {
-                // 이 함수는 주로 문자 수 계산에 사용되며, 개행 문자를 빈 문자열로 대체하여 길이에 포함되지 않게 합니다.
-                return textString.replace(/\n/g, '');
+                if (excludeSpecialCharacters) { // NEW: Special Characters exclusion
+                    processedString = processedString.replace(/[^\p{L}\p{N}\s]/gu, ''); // 유니코드 문자, 숫자, 공백이 아닌 모든 것
+                }
+                if (excludeSpaces) {
+                    processedString = processedString.replace(/\s/g, '');
+                }
+                if (excludeNewlines) {
+                    processedString = processedString.replace(/\n/g, '');
+                }
+                return processedString;
             }
 
             /**
@@ -663,9 +654,11 @@
                 if (dom.languageDropdown) {
                     const languageDropdownContent = dom.languageDropdown.querySelector('.py-1');
                     if (languageDropdownContent) {
-                        languageDropdownContent.innerHTML = '';
+                        languageDropdownContent.innerHTML = ''; // Clear existing hardcoded options
+                        console.log("Attempting to populate language dropdown."); // Debug log
                         for (const langKey in translations) {
                             const langData = translations[langKey];
+                            console.log(`Adding language: ${langKey}, Name: ${langData.langName}`); // Debug log
                             const a = document.createElement('a');
                             a.href = "#";
                             a.classList.add('text-gray-700', 'block', 'px-4', 'py-2', 'text-sm', 'hover:bg-gray-100', 'rounded-md');
@@ -675,7 +668,11 @@
                             a.textContent = langData.langName;
                             languageDropdownContent.appendChild(a);
                         }
+                    } else {
+                        console.error("languageDropdownContent not found for language dropdown."); // Debug log
                     }
+                } else {
+                    console.error("languageDropdown not found."); // Debug log
                 }
             }
 
@@ -723,6 +720,7 @@
                 dom.labelExcludeAngleBrackets && (dom.labelExcludeAngleBrackets.textContent = lang.angleBracketExclusionLabel);
                 dom.labelExcludeSquareBrackets && (dom.labelExcludeSquareBrackets.textContent = lang.squareBracketExclusionLabel);
                 dom.labelExcludeCurlyBrackets && (dom.labelExcludeCurlyBrackets.textContent = lang.curlyBracketExclusionLabel); // NEW: Curly Brackets label
+                dom.labelExcludeSpecialCharacters && (dom.labelExcludeSpecialCharacters.textContent = lang.specialCharExclusionLabel); // NEW: Special Characters label
                 dom.labelExcludeSpaces && (dom.labelExcludeSpaces.textContent = lang.spaceExclusionLabel);
                 dom.labelExcludeNewlines && (dom.labelExcludeNewlines.textContent = lang.newlineExclusionLabel);
                 dom.settingsLabel && (dom.settingsLabel.textContent = lang.settingsLabel);
@@ -775,10 +773,18 @@
                     let exceedingLineCount = 0;
                     const rawLinesForLineCharCheck = dom.textInput?.value.split('\n') || [];
                     rawLinesForLineCharCheck.forEach(rawLine => {
-                        let processedLineForCharCount = removeTags(rawLine);
-                        if (excludeSpaces) {
-                            processedLineForCharCount = removeSpaces(processedLineForCharCount);
-                        }
+                        let processedLineForCharCount = rawLine; // Start with raw line for line-specific processing
+                        if (excludeAngleBrackets) { processedLineForCharCount = processedLineForCharCount.replace(/<[^>]*>/g, ''); }
+                        if (excludeSquareBrackets) { processedLineForCharCount = processedLineForCharCount.replace(/\[[^\]]*\]/g, ''); }
+                        if (excludeCurlyBrackets) { processedLineForCharCount = processedLineForCharCount.replace(/\{[^}]*\}/g, ''); }
+                        if (excludeSpecialCharacters) { processedLineForCharCount = processedLineForCharCount.replace(/[^\p{L}\p{N}\s]/gu, ''); } // NEW: Special Characters
+                        if (excludeSpaces) { processedLineForCharCount = processedLineForCharCount.replace(/\s/g, ''); }
+                        // For line length count, newlines are implicitly handled by splitting.
+                        // We don't remove them if excludeNewlines is true, because we want length of THAT line.
+                        // The `calculateLength` function will count based on the modified line.
+                        // If excludeNewlines is checked globally, it only affects the total count, not line character count
+                        // as a single line has no internal newlines to exclude from its length.
+
                         if (calculateLength(processedLineForCharCount) > maxCharLine) {
                             exceedingLineCount++;
                         }
@@ -819,62 +825,57 @@
             function updateHighlightedTextDisplay(rawInputText) {
                 if (!dom.highlightedTextDisplay) return;
 
-                let outputText = rawInputText; // Start with the raw text
+                let outputHtml = rawInputText;
 
                 // 1. 모든 HTML 특수 문자를 HTML 엔티티로 변환하여 텍스트로 표시되도록 합니다.
                 // 이 단계에서 <br> 같은 태그는 &lt;br&gt;로 변환됩니다.
-                outputText = outputText.replace(/&/g, '&amp;')
+                outputHtml = outputHtml.replace(/&/g, '&amp;')
                                       .replace(/</g, '&lt;')
                                       .replace(/>/g, '&gt;')
                                       .replace(/"/g, '&quot;')
                                       .replace(/'/g, '&#039;');
 
 
-                // 2. 이제 변환된 텍스트에서 원하는 태그 패턴을 찾아 색상 강조 또는 제거를 적용합니다.
-                // 정규식에 HTML 엔티티를 포함하여 매칭하도록 수정합니다.
-                // 예를 들어, <> 태그는 &lt;tag&gt; 형태가 됩니다.
-
-                // <> 태그 처리
+                // 2. 태그 및 특수문자 처리: 제외 옵션이 켜져 있으면 제거, 꺼져 있으면 강조 (태그만 해당)
+                // <> 태그
                 if (dom.excludeAngleBrackets.checked) {
-                    // 제외 옵션이 켜져 있으면, 태그를 제거 (HTML 엔티티 포함)
-                    outputText = outputText.replace(/&lt;[^&]*?&gt;/g, '');
+                    outputHtml = outputHtml.replace(/&lt;[^&]*?&gt;/g, ''); // HTML 엔티티화된 태그 제거
                 } else {
-                    // 제외 옵션이 꺼져 있으면, 태그에 빨간색 강조 적용
-                    outputText = outputText.replace(/(&lt;[^&]*?&gt;)/g, '<span class="highlight-red-inline">$1</span>');
+                    outputHtml = outputHtml.replace(/(&lt;[^&]*?&gt;)/g, '<span class="highlight-red-inline">$1</span>');
                 }
 
-                // [] 태그 처리
+                // [] 태그
                 if (dom.excludeSquareBrackets.checked) {
-                    // 제외 옵션이 켜져 있으면, 태그를 제거
-                    outputText = outputText.replace(/\[[^\]]*?\]/g, '');
+                    outputHtml = outputHtml.replace(/\[[^\]]*?\]/g, '');
                 } else {
-                    // 제외 옵션이 꺼져 있으면, 태그에 하늘색 강조 적용
-                    outputText = outputText.replace(/(\[[^\]]*?\])/g, '<span class="highlight-blue-inline">$1</span>');
+                    outputHtml = outputHtml.replace(/(\[[^\]]*?\])/g, '<span class="highlight-blue-inline">$1</span>');
                 }
 
-                // {} 태그 처리
+                // {} 태그
                 if (dom.excludeCurlyBrackets.checked) {
-                    // 제외 옵션이 켜져 있으면, 태그를 제거
-                    outputText = outputText.replace(/\{[^}]*?\}/g, '');
+                    outputHtml = outputHtml.replace(/\{[^}]*?\}/g, '');
                 } else {
-                    // 제외 옵션이 꺼져 있으면, 태그에 보라색 강조 적용
-                    outputText = outputText.replace(/(\{[^}]*?\})/g, '<span class="highlight-purple-inline">$1</span>');
+                    outputHtml = outputHtml.replace(/(\{[^}]*?\})/g, '<span class="highlight-purple-inline">$1</span>');
+                }
+
+                // 특수문자 (언어에 관계없이 처리해야 하므로 \p{L}\p{N}\s를 사용)
+                // 특수문자는 제외하지 않을 경우 별도로 강조하지 않으므로 else 블록 없음.
+                if (dom.excludeSpecialCharacters.checked) {
+                    outputHtml = outputHtml.replace(/[^\p{L}\p{N}\s]/gu, ''); // 유니코드 문자, 숫자, 공백이 아닌 모든 것을 제거
                 }
 
                 // 3. 공백 및 개행 문자 처리
                 if (dom.excludeNewlines.checked) {
-                    outputText = outputText.replace(/\n/g, ' ');
+                    outputHtml = outputHtml.replace(/\n/g, ' ');
                 }
 
                 if (dom.excludeSpaces.checked) {
-                    outputText = outputText.replace(/\s+/g, '');
+                    outputHtml = outputHtml.replace(/\s+/g, '');
                 } else {
-                    // 공백을 제외하지 않는 경우, 여러 공백을 하나의 공백으로 정규화
-                    // trim()은 마지막에 호출하여 전체 문자열의 양 끝 공백을 제거
-                    outputText = outputText.replace(/\s+/g, ' ').trim();
+                    outputHtml = outputHtml.replace(/\s+/g, ' ').trim();
                 }
 
-                dom.highlightedTextDisplay.innerHTML = outputText;
+                dom.highlightedTextDisplay.innerHTML = outputHtml;
             }
 
 
@@ -893,11 +894,15 @@
                     } else {
                         originalLines.forEach((originalLine, index) => {
                             let lineForCounting = originalLine;
+                            // Apply all exclusions to the line for its character count
                             if (excludeAngleBrackets) { lineForCounting = lineForCounting.replace(/<[^>]*>/g, ''); }
                             if (excludeSquareBrackets) { lineForCounting = lineForCounting.replace(/\[[^\]]*\]/g, ''); }
                             if (excludeCurlyBrackets) { lineForCounting = lineForCounting.replace(/\{[^}]*\}/g, ''); }
+                            if (excludeSpecialCharacters) { lineForCounting = lineForCounting.replace(/[^\p{L}\p{N}\s]/gu, ''); } // NEW
                             if (excludeSpaces) { lineForCounting = lineForCounting.replace(/\s/g, ''); }
-                            if (excludeNewlines) { lineForCounting = lineForCounting.replace(/\n/g, ''); }
+                            // Newlines within a single line are not relevant for its character count.
+                            // The line itself doesn't contain '\n' unless it's a multiline string in `originalLine`,
+                            // which is handled by `split('\n')`.
 
                             const lineElement = document.createElement('p');
                             // 텍스트를 구성할 때 linePrefix와 charUnit을 사용하여 다국어 지원
@@ -944,22 +949,13 @@
                 const rawInputText = dom.textInput?.value || '';
 
                 // --- 1. Total Character Count ---
-                let textForTotalCharCount = removeTags(rawInputText);
-                if (excludeSpaces) {
-                    textForTotalCharCount = removeSpaces(textForTotalCharCount);
-                }
-                // 개행 제외 옵션이 켜져 있을 때만 개행 문자를 빈 문자열로 대체 (길이 계산을 위함)
-                let textForLengthCalculation = textForTotalCharCount;
-                if (excludeNewlines) {
-                    textForLengthCalculation = removeNewlines(textForLengthCalculation); // Use removeNewlines which replaces \n with '' for COUNTING
-                }
-
-                const currentTotalCharCount = calculateLength(textForLengthCalculation);
+                // processTextForCounting 함수를 사용하여 모든 제외 옵션을 적용한 텍스트로 계산
+                let textForTotalCharCount = processTextForCounting(rawInputText);
+                
+                const currentTotalCharCount = calculateLength(textForTotalCharCount);
                 dom.totalCharCount && (dom.totalCharCount.textContent = currentTotalCharCount);
                 dom.totalCharCountTitle && (dom.totalCharCountTitle.textContent = `${lang.charCountLabel} (${lang.countingModes[countingMode]})`);
 
-                // "최대 줄 수나, 최대 워드 수 설정에 따른 색상 변경은 없어요."
-                // 이전에 있던 전체 문자 수 초과 시 배경색 변경 로직을 제거
                 const totalCharCountBox = dom.totalCharCount.closest('.bg-blue-50');
                 if (totalCharCountBox) {
                     totalCharCountBox.classList.remove('bg-highlight-red'); // 항상 제거
@@ -973,15 +969,19 @@
                 dom.totalLineCountTitle && (dom.totalLineCountTitle.textContent = lang.lineCountLabel);
 
                 // --- 3. Word Count ---
-                // For word count, newlines should act as delimiters but not be part of words.
-                // So, we only remove tags, but NOT newlines from textForWordCount.
-                let textForWordCount = removeTags(rawInputText);
+                // 단어 수 계산에는 태그와 특수문자 제거, 공백은 단어 구분자로 사용
+                let textForWordCount = rawInputText;
+                if (excludeAngleBrackets) { textForWordCount = textForWordCount.replace(/<[^>]*>/g, ''); }
+                if (excludeSquareBrackets) { textForWordCount = textForWordCount.replace(/\[[^\]]*\]/g, ''); }
+                if (excludeCurlyBrackets) { textForWordCount = textForWordCount.replace(/\{[^}]*\}/g, ''); }
+                if (excludeSpecialCharacters) { textForWordCount = textForWordCount.replace(/[^\p{L}\p{N}\s]/gu, ''); } // NEW
+
                 let currentTotalWordCount = 0;
                 if (lang.wordCountSupported) {
                     // Split by any whitespace (including newlines) and filter out empty strings
                     const words = textForWordCount.split(/\s+/).filter(word => word.length > 0);
                     currentTotalWordCount = words.length;
-                    dom.totalWordCount && (dom.totalWordCount.textContent = currentTotalWordCount);
+                    dom.totalWordCount && (dom.totalWordCount.textContent = `${currentTotalWordCount} ${lang.wordCountLabel}`);
                     dom.wordCountContainer && dom.wordCountContainer.classList.remove('hidden');
                     dom.totalWordCountTitle && (dom.totalWordCountTitle.textContent = lang.wordCountLabel);
                 } else {
@@ -1061,6 +1061,12 @@
                     updateExclusionLabelColors(); // 상태 변경 시 라벨 색상 업데이트
                 });
 
+                dom.excludeSpecialCharacters?.addEventListener('change', () => { // NEW
+                    excludeSpecialCharacters = dom.excludeSpecialCharacters.checked;
+                    updateCounts();
+                    updateExclusionLabelColors(); // 상태 변경 시 라벨 색상 업데이트
+                });
+
                 dom.excludeSpaces?.addEventListener('change', () => {
                     excludeSpaces = dom.excludeSpaces.checked;
                     updateCounts();
@@ -1127,11 +1133,10 @@
                             'bg-red-300', 'border-red-500', 'text-red-500', 'hover:bg-red-400',
                             'bg-blue-300', 'border-blue-500', 'text-blue-500', 'hover:bg-blue-400',
                             'bg-purple-300', 'border-purple-500', 'text-purple-500', 'hover:bg-purple-400',
-                            'bg-gray-200', 'border-gray-300', 'text-gray-700', 'hover:bg-gray-300', // 기본 회색 (선택 안 된 기본값)
-                            'bg-gray-200', 'border-gray-400', 'text-gray-400', 'hover:bg-gray-300' // 톤다운된 회색 (선택 안 된 공백/개행)
+                            'bg-gray-200', 'border-gray-400', 'text-gray-400', 'hover:bg-gray-300'
                         );
                         label.querySelector('span').classList.remove(
-                            'text-white', 'text-red-500', 'text-blue-500', 'text-purple-500', 'text-gray-700', 'text-gray-400'
+                            'text-white', 'text-red-500', 'text-blue-500', 'text-purple-500', 'text-gray-400'
                         );
 
 
@@ -1146,7 +1151,7 @@
                             } else if (checkbox.id === 'excludeCurlyBrackets') {
                                 label.classList.add('bg-purple-500', 'border-purple-600', 'text-white', 'hover:bg-purple-600');
                                 label.querySelector('span').classList.add('text-white');
-                            } else if (checkbox.id === 'excludeSpaces' || checkbox.id === 'excludeNewlines') {
+                            } else if (checkbox.id === 'excludeSpaces' || checkbox.id === 'excludeNewlines' || checkbox.id === 'excludeSpecialCharacters') { // NEW
                                 label.classList.add('bg-gray-900', 'border-gray-950', 'text-white', 'hover:bg-gray-950');
                                 label.querySelector('span').classList.add('text-white');
                             }
@@ -1161,7 +1166,7 @@
                             } else if (checkbox.id === 'excludeCurlyBrackets') {
                                 label.classList.add('bg-purple-300', 'border-purple-500', 'text-purple-500', 'hover:bg-purple-400');
                                 label.querySelector('span').classList.add('text-purple-500');
-                            } else if (checkbox.id === 'excludeSpaces' || checkbox.id === 'excludeNewlines') {
+                            } else if (checkbox.id === 'excludeSpaces' || checkbox.id === 'excludeNewlines' || checkbox.id === 'excludeSpecialCharacters') { // NEW
                                 label.classList.add('bg-gray-200', 'border-gray-400', 'text-gray-400', 'hover:bg-gray-300');
                                 label.querySelector('span').classList.add('text-gray-400');
                             }
@@ -1174,20 +1179,24 @@
             // --- Initialization ---
             function initializeApp() {
                 // 빌드 날짜 설정 (고정된 텍스트)
-                dom.buildVersionDate && (dom.buildVersionDate.textContent = `Ver. 2.6 2025-08-10`); // 버전 업데이트
+                dom.buildVersionDate && (dom.buildVersionDate.textContent = `Ver. 2.14 2025-08-11`); // 버전 업데이트
 
                 // 기본 체크박스 상태 설정
                 dom.excludeAngleBrackets && (dom.excludeAngleBrackets.checked = true);
                 dom.excludeSquareBrackets && (dom.excludeSquareBrackets.checked = true);
                 dom.excludeCurlyBrackets && (dom.excludeCurlyBrackets.checked = true);
+                dom.excludeSpecialCharacters && (dom.excludeSpecialCharacters.checked = false); // NEW: Default to unchecked
                 dom.excludeSpaces && (dom.excludeSpaces.checked = false);
                 dom.excludeNewlines && (dom.excludeNewlines.checked = true); 
                 dom.toggleSettings && (dom.toggleSettings.checked = false); // 세부 설정 기본은 비활성화
 
-                // 초기 `excludeNewlines`, `excludeSpaces`, `excludeCurlyBrackets` 변수 값 업데이트
-                excludeNewlines = dom.excludeNewlines.checked;
-                excludeSpaces = dom.excludeSpaces.checked;
+                // 초기 변수 값 업데이트
+                excludeAngleBrackets = dom.excludeAngleBrackets.checked;
+                excludeSquareBrackets = dom.excludeSquareBrackets.checked;
                 excludeCurlyBrackets = dom.excludeCurlyBrackets.checked;
+                excludeSpecialCharacters = dom.excludeSpecialCharacters.checked; // NEW
+                excludeSpaces = dom.excludeSpaces.checked;
+                excludeNewlines = dom.excludeNewlines.checked;
 
 
                 updateLanguage(); // 초기 언어 설정 및 UI 업데이트
